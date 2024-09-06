@@ -6,7 +6,7 @@ import DonationButton from '../atoms/DonationButton';
 import ProfileButton from '../atoms/ProfileButton';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../rutasdenavegacion/rutasDeScreens'; // Ajusta según tu estructura
+import { RootStackParamList } from '../routesNavigation/routesScreens'; // Ajusta según tu estructura
 
 type NavigationProps = StackNavigationProp<RootStackParamList>;
 
