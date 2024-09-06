@@ -21,10 +21,10 @@ const Card: React.FC<CardProps> = ({ iconSource, title, width = 160, height = 20
 const styles = StyleSheet.create({
   card: {
     padding: 10,
-    backgroundColor: '#E1E0C9',
+    backgroundColor: '#D8D8D8',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#000000',
+    borderColor: '#000',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,

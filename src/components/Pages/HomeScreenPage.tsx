@@ -8,15 +8,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const HomeScreen: React.FC = () => (
   <SafeAreaView style={styles.SafeAreaView}>
     <View style={styles.container}>
-      <Header 
-        logoSource={require('../../assets/BAQ-Logo.png')} 
-        title="Banco" 
+      <Header
+        logoSource={require('../../assets/BAQ-Logo.png')}
+        title="Banco"
       />
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.mainSection}>
-        <Text style={styles.subtitle}>
-        Buen día, Jose Luis
-      </Text>
+          <Text style={styles.subtitle}>
+            Buen día, Jose Luis
+          </Text>
           <MainSection />
         </View>
       </ScrollView>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#FFFEEE',
+    backgroundColor: '#FFF',
   },
   scrollViewContent: {
     flexGrow: 1,

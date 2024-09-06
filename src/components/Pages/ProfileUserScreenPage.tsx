@@ -8,9 +8,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const ProfileScreenPage: React.FC = () => (
   <SafeAreaView style={styles.SafeAreaView}>
     <View style={styles.container}>
-      <Header 
-        logoSource={require('../../assets/BAQ-Logo.png')} 
-        title="Perfil" 
+      <Header
+        logoSource={require('../../assets/BAQ-Logo.png')}
+        title="Perfil"
       />
       <View style={styles.content}>
         <Text style={styles.text}>Aquí va el contenido del perfil</Text>
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#FFFEEE',
+    backgroundColor: '#FFF',
   },
   content: {
     flex: 1,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: '#000000', // Color del texto
+    color: '#000', // Color del texto
     textAlign: 'center', // Alinea el texto al centro
   },
 });

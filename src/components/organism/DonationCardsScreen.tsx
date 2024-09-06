@@ -5,11 +5,11 @@ import Card from '../molecules/CardHomeScreen';
 const DonationScreenPage: React.FC = () => {
   // Obtener el tamaño actual de la pantalla
   const { width } = useWindowDimensions();
-  
+
   // Definir el ancho y alto de las cartas
   const cardWidth = width * 0.4;  // Por ejemplo, 40% del ancho de la pantalla
   const cardHeight = 200;        // Altura fija
-  
+
   // Array de imágenes con sus rutas
   const icons = [
     require('../../assets/donarImagen.png'),
@@ -42,8 +42,8 @@ const DonationScreenPage: React.FC = () => {
         </Text>
         <View style={styles.cardsContainer}>
           {titles.map((title, index) => (
-            <Card 
-              key={index} 
+            <Card
+              key={index}
               iconSource={icons[index]}
               title={title}
               width={cardWidth}      // Aplicar el ancho calculado
@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     flexGrow: 1,
     padding: 10,
-    backgroundColor: '#FFFEEE',
+    backgroundColor: '#FFF',
   },
   subtitle: {
     fontSize: 24,
-    color: '#000000',
+    color: '#000',
     textAlign: 'left',
     marginHorizontal: 20,
     marginVertical: 30,

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 10,
     width: 375,
-    height: 350,
+    height: 300,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden', // Asegura que el contenido no sobresalga del borde redondeado

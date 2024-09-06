@@ -7,15 +7,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import DonationScreenCards from '../organism/DonationCardsScreen';
 
 const DonationScreenPage: React.FC = () => {
-  
+
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <View style={styles.container}>
-        <Header 
-          logoSource={require('../../assets/BAQ-Logo.png')} 
-          title="Banco" 
+        <Header
+          logoSource={require('../../assets/BAQ-Logo.png')}
+          title="Banco"
         />
-        <DonationScreenCards/>
+        <DonationScreenCards />
         <NavigationBar />
       </View>
     </SafeAreaView>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#FFFEEE',
+    backgroundColor: '#FFF',
   },
   scrollViewContent: {
     flexGrow: 1,

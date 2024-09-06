@@ -10,13 +10,13 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ logoSource, title }) => (
   <View>
     <View style={styles.header}>
-      <TouchableOpacity onPress={() => {/* Lógica para el menú */}} style={styles.iconContainerLeft}>
+      <TouchableOpacity onPress={() => {/* Lógica para el menú */ }} style={styles.iconContainerLeft}>
         <Icon name="menu" size={35} color="black" />
       </TouchableOpacity>
 
       <Image source={logoSource} style={styles.logo} />
 
-      <TouchableOpacity onPress={() => {/* Lógica para los mensajes */}} style={styles.iconContainerRight}>
+      <TouchableOpacity onPress={() => {/* Lógica para los mensajes */ }} style={styles.iconContainerRight}>
         <Icon name="chatbox-ellipses-outline" size={35} color="black" />
       </TouchableOpacity>
     </View>
@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ logoSource, title }) => (
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#FFFEEE',
+    backgroundColor: '#FFF',
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
