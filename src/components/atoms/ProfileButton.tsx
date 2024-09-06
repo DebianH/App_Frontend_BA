@@ -21,8 +21,10 @@ const ProfileButton: React.FC<ProfileButtonProps> = ({ onPress }) => {
 
 const styles = StyleSheet.create({
   button: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    // backgroundColor: '#c0c0c0',
   },
   iconTextContainer: {
     alignItems: 'center',

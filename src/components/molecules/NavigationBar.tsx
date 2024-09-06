@@ -17,9 +17,9 @@ const NavigationBar: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.line} />
       <View style={styles.buttonsContainer}>
+        <ProfileButton onPress={() => navigation.navigate('ProfileScreenPage')} />
         <HomeButton onPress={() => navigation.navigate('HomeScreenPage')} />
         <DonationButton onPress={() => navigation.navigate('DonationScreenPage')} />
-        <ProfileButton onPress={() => navigation.navigate('ProfileScreenPage')} />
       </View>
     </View>
   );
@@ -45,10 +45,18 @@ const styles = StyleSheet.create({
     height: 70,
   },
   buttonsContainer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
+  },
+  button: {
     flex: 1,
+    marginHorizontal: 10,
+    paddingVertical: 10,
+    alignItems: 'center',
+    backgroundColor: '#007AFF',
+    borderRadius: 5,
   },
 });
 

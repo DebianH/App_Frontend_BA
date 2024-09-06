@@ -16,6 +16,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 const Routes: React.FC = () => {
   return (
     <Stack.Navigator
+      initialRouteName="HomeScreenPage"
       screenOptions={{
         headerShown: false, // Opcional: Oculta el encabezado por defecto
       }}

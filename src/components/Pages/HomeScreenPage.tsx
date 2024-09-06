@@ -15,7 +15,7 @@ const HomeScreen: React.FC = () => (
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.mainSection}>
           <Text style={styles.subtitle}>
-            Buen día, Jose Luis
+            Hola, Jose Luis!
           </Text>
           <MainSection />
         </View>
@@ -31,11 +31,12 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 24,
-    color: '#000000', // Color del texto
-    textAlign: 'left', // Alinea el texto a la izquierda
-    marginHorizontal: 20, // Espaciado horizontal
-    marginVertical: 30, // Espaciado arriba y abajo
-    fontWeight: 'bold', // Texto en negrita
+    color: '#000',
+    flex: 1,
+    textAlign: 'center',
+    marginTop: 25,
+    marginBottom: 10,
+    fontWeight: 'bold',
   },
   container: {
     flex: 1,

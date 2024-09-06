@@ -12,7 +12,7 @@ const DonationButton: React.FC<DonationButtonProps> = ({ onPress }) => {
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <View style={styles.iconTextContainer}>
         <Icon name="bag-handle-outline" size={35} color="#000000" />
-        <Text style={styles.buttonText}>Donate</Text>
+        <Text style={styles.buttonText}>Donar</Text>
       </View>
     </TouchableOpacity>
   );
@@ -20,6 +20,7 @@ const DonationButton: React.FC<DonationButtonProps> = ({ onPress }) => {
 
 const styles = StyleSheet.create({
   button: {
+    flex: 1,
     alignItems: 'center', // Centra todo el contenido dentro del botón
     justifyContent: 'center',
   },
