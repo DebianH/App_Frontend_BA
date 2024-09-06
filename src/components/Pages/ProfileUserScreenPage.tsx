@@ -1,21 +1,14 @@
 // src/components/Pages/ProfileScreenPage.tsx
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import Header from '../molecules/Header';
-import NavigationBar from '../molecules/NavigationBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ProfileScreenPage: React.FC = () => (
   <SafeAreaView style={styles.SafeAreaView}>
     <View style={styles.container}>
-      <Header
-        logoSource={require('../../assets/BAQ-Logo.png')}
-        title="Perfil"
-      />
       <View style={styles.content}>
         <Text style={styles.text}>Aquí va el contenido del perfil</Text>
       </View>
-      <NavigationBar />
     </View>
   </SafeAreaView>
 );

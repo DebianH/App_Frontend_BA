@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image, ImageSourcePropType, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, ImageSourcePropType, TouchableOpacity, Dimensions, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; // Usando Ionicons para ejemplo
 
 interface HeaderProps {
@@ -7,21 +7,21 @@ interface HeaderProps {
   title: string;
 }
 
+const { width, height } = Dimensions.get('window');
+
 const Header: React.FC<HeaderProps> = ({ logoSource, title }) => (
-  <View>
+  <SafeAreaView >
     <View style={styles.header}>
       <TouchableOpacity onPress={() => {/* Lógica para el menú */ }} style={styles.iconContainerLeft}>
         <Icon name="menu" size={35} color="black" />
       </TouchableOpacity>
-
       <Image source={logoSource} style={styles.logo} />
-
       <TouchableOpacity onPress={() => {/* Lógica para los mensajes */ }} style={styles.iconContainerRight}>
         <Icon name="chatbox-ellipses-outline" size={35} color="black" />
       </TouchableOpacity>
     </View>
     <View style={styles.line} />
-  </View>
+  </SafeAreaView>
 );
 
 const styles = StyleSheet.create({
@@ -30,26 +30,26 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between', // Distribuye el espacio entre los íconos y el logo
+    justifyContent: 'space-between',
   },
   iconContainerLeft: {
     flex: 1,
-    alignItems: 'flex-start', // Alinea el ícono del menú a la izquierda
+    alignItems: 'flex-start',
   },
   iconContainerRight: {
     flex: 1,
-    alignItems: 'flex-end', // Alinea el ícono de los mensajes a la derecha
+    alignItems: 'flex-end',
   },
   logo: {
-    flex: 2.5, // Ajusta el tamaño del logo aumentando el espacio que ocupa
-    width: 45, // Aumenta el tamaño del logo
+    flex: 2.5,
+    width: 45,
     height: 45,
     resizeMode: 'contain',
   },
   line: {
-    height: 1.5, // Altura de la línea
+    height: 1.5,
     backgroundColor: '#000', // Color de la línea
-    width: '100%', // Ocupa todo el ancho del contenedor
+    width: '100%',
   },
 });
 

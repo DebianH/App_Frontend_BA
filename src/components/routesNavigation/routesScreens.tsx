@@ -1,9 +1,9 @@
 // rutasDeScreens.tsx
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreenPage from '../pages/HomeScreenPage';
-import DonationScreenPage from '../pages/DonationScreenPage';
-import ProfileScreenPage from '../pages/ProfileUserScreenPage'; // Asegúrate de importar el componente correctamente
+import HomeScreenPage from '../Pages/HomeScreenPage';
+import DonationScreenPage from '../Pages/DonationScreenPage';
+import ProfileScreenPage from '../Pages/ProfileUserScreenPage'; // Asegúrate de importar el componente correctamente
 
 export type RootStackParamList = {
   HomeScreenPage: undefined;

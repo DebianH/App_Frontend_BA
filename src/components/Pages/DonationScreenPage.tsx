@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
-import Header from '../molecules/Header';
 import Card from '../molecules/CardHomeScreen';
-import NavigationBar from '../molecules/NavigationBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DonationScreenCards from '../organism/DonationCardsScreen';
 
@@ -11,12 +9,7 @@ const DonationScreenPage: React.FC = () => {
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <View style={styles.container}>
-        <Header
-          logoSource={require('../../assets/BAQ-Logo.png')}
-          title="Banco"
-        />
         <DonationScreenCards />
-        <NavigationBar />
       </View>
     </SafeAreaView>
   );
