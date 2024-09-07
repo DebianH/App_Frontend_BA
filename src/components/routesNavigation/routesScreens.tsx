@@ -18,7 +18,7 @@ const Routes: React.FC = () => {
     <Stack.Navigator
       initialRouteName="HomeScreenPage"
       screenOptions={{
-        headerShown: false, // Opcional: Oculta el encabezado por defecto
+        headerShown: false,
       }}
     >
       <Stack.Screen

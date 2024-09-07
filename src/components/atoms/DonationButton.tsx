@@ -11,7 +11,7 @@ const DonationButton: React.FC<DonationButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <View style={styles.iconTextContainer}>
-        <Icon name="bag-handle-outline" size={35} color="#000000" />
+        <Icon name="bag-check-outline" size={35} color="#000000" />
         <Text style={styles.buttonText}>Donar</Text>
       </View>
     </TouchableOpacity>

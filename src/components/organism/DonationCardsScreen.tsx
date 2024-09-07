@@ -12,19 +12,19 @@ const DonationScreenPage: React.FC = () => {
 
   // Array de imágenes con sus rutas
   const icons = [
-    require('../../assets/donarImagen.png'),
-    require('../../assets/donarImagen.png'),
-    require('../../assets/donarImagen.png'),
-    require('../../assets/donarImagen.png'),
-    require('../../assets/donarImagen.png'),
-    require('../../assets/donarImagen.png'),
-    require('../../assets/donarImagen.png'),
-    require('../../assets/donarImagen.png'),
+    require('../../assets/frutas.png'),
+    require('../../assets/frutas.png'),
+    require('../../assets/frutas.png'),
+    require('../../assets/frutas.png'),
+    require('../../assets/frutas.png'),
+    require('../../assets/frutas.png'),
+    require('../../assets/frutas.png'),
+    require('../../assets/frutas.png'),
   ];
 
   // Array de nombres o títulos
   const titles = [
-    'Categoría 1',
+    'Frutas',
     'Categoría 2',
     'Categoría 3',
     'Categoría 4',

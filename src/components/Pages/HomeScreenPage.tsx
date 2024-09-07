@@ -7,7 +7,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const HomeScreen: React.FC = () => (
   <SafeAreaView style={styles.SafeAreaView}>
     <View style={styles.container}>
-
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.mainSection}>
           <Text style={styles.subtitle}>

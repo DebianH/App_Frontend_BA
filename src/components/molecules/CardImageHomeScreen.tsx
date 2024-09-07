@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderRadius: 10, // Aplica el radio de borde redondeado
     borderWidth: 1, // Grosor del borde
-    borderColor: '#000', // Color del borde
+    borderColor: '#c0c0c0', // Color del borde
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 10,
-    width: 375,
+    width: 350,
     height: 300,
     justifyContent: 'center',
     alignItems: 'center',

@@ -10,7 +10,8 @@ interface HeaderProps {
 const { width, height } = Dimensions.get('window');
 
 const Header: React.FC<HeaderProps> = ({ logoSource, title }) => (
-  <SafeAreaView >
+  // Distancia de encabezado revisar
+  <View style={{ marginTop: height * 0.03 }} >
     <View style={styles.header}>
       <TouchableOpacity onPress={() => {/* Lógica para el menú */ }} style={styles.iconContainerLeft}>
         <Icon name="menu" size={35} color="black" />
@@ -21,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ logoSource, title }) => (
       </TouchableOpacity>
     </View>
     <View style={styles.line} />
-  </SafeAreaView>
+  </View>
 );
 
 const styles = StyleSheet.create({
@@ -48,8 +49,11 @@ const styles = StyleSheet.create({
   },
   line: {
     height: 1.5,
-    backgroundColor: '#000', // Color de la línea
+    backgroundColor: '#c0c0c0',
     width: '100%',
+    elevation: 5,
+    shadowColor: '#A9A9A9'
+
   },
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, ImageSourcePropType, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, ImageSourcePropType, TouchableOpacity, Image } from 'react-native';
 import Icon from '../atoms/iconHomeScreen';
 
 interface CardProps {
@@ -12,8 +12,9 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ iconSource, title, width = 160, height = 200 }) => {
   return (
     <TouchableOpacity style={[styles.card, { width, height }]}>
-      <Icon source={iconSource} />
       <Text style={styles.title}>{title}</Text>
+      {/* <Icon source={iconSource} /> */}
+      <Image source={iconSource} />
     </TouchableOpacity>
   );
 };
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#D8D8D8',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#000',
+    borderColor: '#c0c0c0',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
@@ -36,9 +37,10 @@ const styles = StyleSheet.create({
     marginVertical: 10, // Espaciado vertical entre tarjetas
   },
   title: {
-    fontSize: 16,
+    fontSize: 20,
     color: '#000',
-    marginTop: 5,
+    marginBottom: 20,
+    textAlign: "center"
   },
 });
 

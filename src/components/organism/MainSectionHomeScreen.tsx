@@ -7,20 +7,20 @@ import CardImage from '../molecules/CardImageHomeScreen';
 const MainSection: React.FC = () => (
   <View style={styles.section}>
     <CardImage
-      iconSource={require('../../assets/donarImagen.png')}
+      iconSource={require('../../assets/homeMain.jpg')}
       buttonTitle="Donar"
       onButtonPress={() => { }}
     />
     <View style={styles.cardContainer}>
       <Card
-        iconSource={require('../../assets/BAQ-Logo.png')}
-        title="Tarjeta B"
+        iconSource={require('../../assets/homeNews.png')}
+        title="Noticias"
         width={160}
         height={200}
       />
       <Card
-        iconSource={require('../../assets/BAQ-Logo.png')}
-        title="Tarjeta C"
+        iconSource={require('../../assets/historyDonations.png')}
+        title="Historial"
         width={160}
         height={200}
       />

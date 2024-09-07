@@ -7,18 +7,31 @@ interface ButtonProps extends TouchableOpacityProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ title, onPress, style }) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+  <TouchableOpacity style={styles.button} onPress={onPress}>
     <Text style={styles.text}>{title}</Text>
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
   button: {
-    padding: 10,
-    backgroundColor: '#008747',
-    borderRadius: 10,
+    backgroundColor: "#40bf40",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    // borderColor: "#c0c0c0",
+    // shadowColor: "#000000",
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
+    // shadowOffset: {
+    //   height: 1,
+    //   width: 1
+    // },
+    width: 200,
+    // textAlign: "center",
+
   },
   text: {
+    fontSize: 16,
     color: '#FFF',
     textAlign: 'center',
   },

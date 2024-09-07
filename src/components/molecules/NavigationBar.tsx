@@ -13,6 +13,7 @@ type NavigationProps = StackNavigationProp<RootStackParamList>;
 const NavigationBar: React.FC = () => {
   const navigation = useNavigation<NavigationProps>(); // Ajusta el tipo de navegación
 
+
   return (
     <View style={styles.container}>
       <View style={styles.line} />
@@ -27,9 +28,11 @@ const NavigationBar: React.FC = () => {
 
 const styles = StyleSheet.create({
   line: {
-    height: 1.5,
-    backgroundColor: '#000',
+    height: 1.8,
+    backgroundColor: '#c0c0c0',
     width: '100%',
+    elevation: 5,
+    shadowColor: '#A9A9A9',
     position: 'absolute',
     top: 0,
   },
