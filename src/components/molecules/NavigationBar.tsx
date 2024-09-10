@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import HomeButton from '../atoms/HomeButton';
 import DonationButton from '../atoms/DonationButton';
-import ProfileButton from '../atoms/ProfileButton';
+import ChartButton from '../atoms/ChartButton';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../routesNavigation/routesScreens'; // Ajusta según tu estructura
@@ -18,7 +18,7 @@ const NavigationBar: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.line} />
       <View style={styles.buttonsContainer}>
-        <ProfileButton onPress={() => navigation.navigate('ProfileScreenPage')} />
+        <ChartButton onPress={() => navigation.navigate('ChartScreenPage')} />
         <HomeButton onPress={() => navigation.navigate('HomeScreenPage')} />
         <DonationButton onPress={() => navigation.navigate('DonationScreenPage')} />
       </View>
