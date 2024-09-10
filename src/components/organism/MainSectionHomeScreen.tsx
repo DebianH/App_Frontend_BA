@@ -25,6 +25,7 @@ const MainSection: React.FC = () => (
         height={200}
       />
     </View>
+
   </View>
 );
 

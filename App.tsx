@@ -14,7 +14,7 @@ export default function App() {
         title="Banco"
       />
       <Routes />
-      <NavigationBar />
+      {/* <NavigationBar /> */}
     </NavigationContainer>
   );
 }

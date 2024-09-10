@@ -7,7 +7,7 @@ const ChartScreenPage: React.FC = () => (
   <SafeAreaView style={styles.SafeAreaView}>
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.text}>Aquí va el contenido del perfil</Text>
+        <Text style={styles.text}>Aquí va el contenido de estadistica</Text>
       </View>
     </View>
   </SafeAreaView>

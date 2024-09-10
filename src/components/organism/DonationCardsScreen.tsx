@@ -37,9 +37,9 @@ const DonationScreenPage: React.FC = () => {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.mainSection}>
-        <Text style={styles.subtitle}>
+        {/* <Text style={styles.subtitle}>
           ¿Qué vamos a donar hoy?
-        </Text>
+        </Text> */}
         <View style={styles.cardsContainer}>
           {titles.map((title, index) => (
             <Card
@@ -62,15 +62,15 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#FFF',
   },
-  subtitle: {
-    fontSize: 24,
-    color: '#000',
-    flex: 1,
-    textAlign: 'center',
-    marginTop: 25,
-    marginBottom: 10,
-    fontWeight: 'bold',
-  },
+  // subtitle: {
+  //   fontSize: 24,
+  //   color: '#000',
+  //   flex: 1,
+  //   textAlign: 'center',
+  //   marginTop: 25,
+  //   marginBottom: 10,
+  //   fontWeight: 'bold',
+  // },
   mainSection: {
     transform: [{ translateY: -10 }],
   },
