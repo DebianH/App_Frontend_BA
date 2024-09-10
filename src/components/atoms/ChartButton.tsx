@@ -8,12 +8,12 @@ interface ProfileButtonProps {
   onPress: () => void;
 }
 
-const ProfileButton: React.FC<ProfileButtonProps> = ({ onPress }) => {
+const ChartButton: React.FC<ProfileButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <View style={styles.iconTextContainer}>
-        <Icon name="person-outline" size={32} color="#000000" />
-        <Text style={styles.buttonText}>Perfil</Text>
+        <Icon name="bar-chart-outline" size={32} color="#000000" />
+        <Text style={styles.buttonText}>Graficas</Text>
       </View>
     </TouchableOpacity>
   );
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileButton;
+export default ChartButton;

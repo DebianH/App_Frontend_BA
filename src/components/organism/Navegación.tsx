@@ -1,4 +1,4 @@
-// NavigationBar.tsx
+// Revisar y corregir todo
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import HomeButton from '../atoms/HomeButton';
