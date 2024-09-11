@@ -1,38 +1,86 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text, ScrollView, useWindowDimensions, ActivityIndicator } from 'react-native';
 import Card from '../molecules/CardHomeScreen';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import DonationScreenCards from '../organism/DonationCardsScreen';
 
 const DonationScreenPage: React.FC = () => {
+  const { width } = useWindowDimensions();
+  const cardWidth = width * 0.4; 
+  const cardHeight = 200;
+
+  const IdProducts = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  const [productData, setProductData] = useState<{ title: string; imageUrl: string }[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchProductData = async () => {
+    try {
+      const data = await Promise.all(
+        IdProducts.map(async (id) => {
+          const response = await fetch(`https://baq-inventory.onrender.com/api/v2/categoryImage/${id}`);
+          const json = await response.json();
+
+          // Verificamos que categoryImage existe y contiene los datos esperados
+          if (json.response && json.response.categoryImage) {
+            return {
+              title: json.response.categoryImage.categoryName, // Nombre de la categoría
+              imageUrl: json.response.categoryImage.categoryImage,  // URL de la imagen
+            };
+          } else {
+            // Si no existen datos para la categoría, retorna valores por defecto vacíos
+            return { title: '', imageUrl: '' };
+          }
+        })
+      );
+      setProductData(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching product data:', error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProductData();
+  }, []);
 
   return (
-    <SafeAreaView style={styles.SafeAreaView}>
-      <View style={styles.container}>
-        <DonationScreenCards />
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <View style={styles.mainSection}>
+        <Text style={styles.subtitle}>¿Qué vamos a donar hoy?</Text>
+        {loading ? (
+          <ActivityIndicator size="large" color="#000" />
+        ) : (
+          <View style={styles.cardsContainer}>
+            {productData.map((product, index) => (
+              <Card
+                key={index}
+                title={product.title} // Se usa categoryName como title
+                width={cardWidth}
+                height={cardHeight}
+                iconSource={{ uri: product.imageUrl || 'https://via.placeholder.com/150' }} // Imagen por defecto si no hay URL
+              />
+            ))}
+          </View>
+        )}
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  SafeAreaView: {
-    flex: 1,
+  scrollViewContent: {
+    flexGrow: 1,
+    padding: 10,
+    backgroundColor: '#FFF',
   },
   subtitle: {
     fontSize: 24,
-    color: '#000000',
-    textAlign: 'left',
-    marginHorizontal: 20,
-    marginVertical: 30,
-    fontWeight: 'bold',
-  },
-  container: {
+    color: '#000',
     flex: 1,
-    backgroundColor: '#FFF',
-  },
-  scrollViewContent: {
-    flexGrow: 1,
+    textAlign: 'center',
+    marginTop: 25,
+    marginBottom: 10,
+    fontWeight: 'bold',
   },
   mainSection: {
     transform: [{ translateY: -10 }],
