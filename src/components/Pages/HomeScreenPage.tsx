@@ -1,17 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, Text, Button } from 'react-native';
 import MainSection from '../organism/MainSectionHomeScreen';
-import NavigationBar from '../molecules/NavigationBar';
+// import NavigationBar from '../molecules/NavigationBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import NewsButton from '../atoms/newsHomeButton';
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../routesNavigation/routesScreens';
-type NavigationProps = StackNavigationProp<RootStackParamList>;
 
-
-const HomeScreen: React.FC = () => {
-  const navigation = useNavigation<NavigationProps>();
+const HomeScreen = () => {
   return (
 
     <SafeAreaView style={styles.SafeAreaView}>
@@ -22,10 +17,6 @@ const HomeScreen: React.FC = () => {
               Hola, Jose Luis!
             </Text>
             <MainSection />
-            <Button
-              title="Go to Details"
-              onPress={() => navigation.navigate('Details')}
-            />
           </View>
         </ScrollView>
       </View>

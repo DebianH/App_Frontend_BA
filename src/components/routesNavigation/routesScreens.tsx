@@ -6,31 +6,44 @@ import HomeScreenPage from '../Pages/HomeScreenPage';
 import DonationScreenPage from '../Pages/DonationScreenPage';
 import ChartScreenPage from '../Pages/ChartUserScreenPage'; // Asegúrate de importar el componente correctamente
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DetailsScreen from '../Pages/NewBAPage';
+import QrScreenPage from '../Pages/QrScreenPage';
+import ProfileScreenPage from '../Pages/ProfileScreenPage';
+import Header from '../molecules/Header';
 // import HomeScreenPage from '../Pages/HomeScreenPage';
-export type RootStackParamList = {
-  HomeScreenPage: undefined;
-  DonationScreenPage: undefined;
-  ChartScreenPage: undefined;
-};
+// export type RootStackParamList = {
+//   HomeScreenPage: undefined;
+//   DonationScreenPage: undefined;
+//   ChartScreenPage: undefined;
+//   QrScreenPage: undefined;
+//   DetailsScreen: undefined;
+// };
 
-const Stack = createStackNavigator<RootStackParamList>();
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
+// const HomeStack = createStackNavigator();
 const DonationStack = createNativeStackNavigator();
 const ChartStack = createNativeStackNavigator();
+
+//Drawer
+const Drawer = createDrawerNavigator();
+
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        name="A"
+        name="Home"
         component={HomeScreenPage}
         options={{ headerShown: false, }}
       />
-      <HomeStack.Screen name="Details" component={DetailsScreen} />
+      <HomeStack.Screen
+        name="Noticias"
+        component={DetailsScreen}
+        options={{ presentation: 'modal' }} />
     </HomeStack.Navigator>
   );
 }
@@ -50,7 +63,7 @@ function ChartStackScreen() {
   return (
     <ChartStack.Navigator>
       <ChartStack.Screen
-        name="B"
+        name="Estadisticas"
         component={ChartScreenPage}
         options={{ headerShown: false, }}
       />
@@ -58,58 +71,91 @@ function ChartStackScreen() {
     </ChartStack.Navigator>
   );
 }
-
-const Routes: React.FC = () => {
+function QrStackScreen() {
   return (
-    // <Stack.Navigator
-    //   initialRouteName="HomeScreenPage"
-    //   screenOptions={{
-    //     headerShown: false,
+    <ChartStack.Navigator>
+      <ChartStack.Screen
+        name="Generar QR"
+        component={QrScreenPage}
+        options={{ headerShown: false, }}
+      />
+    </ChartStack.Navigator>
+  );
+}
+function DrawerGroup() {
+  return (
+    <Drawer.Navigator screenOptions={{ headerShown: false }}>
 
-    //   }}
-    // >
-    //   <Stack.Screen
-    //     name="HomeScreenPage"
-    //     component={HomeScreenPage}
-    //     options={{ title: 'Inicio', }}
-    //   />
-    //   <Stack.Screen
-    //     name="DonationScreenPage"
-    //     component={DonationScreenPage}
-    //     options={{ title: 'Donar' }}
-    //   />
-    //   <Stack.Screen
-    //     name="ChartScreenPage"
-    //     component={ChartScreenPage} // Usa el componente directamente
-    //     options={{ title: 'Perfil' }}
-    //   />
+      <Drawer.Screen name='Profile' component={ProfileScreenPage} options={{ headerShown: true }} />
+      <Drawer.Screen name='Routes' component={Routes} />
+    </Drawer.Navigator>
+  )
+}
+function Routes() {
+  return (
 
-    // </Stack.Navigator>
-
-    // <NavigationContainer >
-    <Tab.Navigator screenOptions={{
-      headerShown: false, tabBarStyle: {
-        height: 70,
-        paddingBottom: 10,
-        paddingTop: 10,
-        elevation: 10,
-      }, tabBarLabelStyle: {
-        fontSize: 14,
-        // fontWeight: 'bold', 
-      },
-    }}>
-      <Tab.Screen name="Graficas" component={ChartStackScreen} options={{
-        tabBarIcon: ({ color, size }) => (
-          <Icon name="bar-chart-outline" size={28} color="#f39200" />
+    <Tab.Navigator
+      initialRouteName='Inicio'
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          height: 70,
+          paddingBottom: 10,
+          paddingTop: 10,
+          elevation: 10,
+        },
+        tabBarLabelStyle: {
+          fontSize: 14,
+        },
+      }}>
+      <Tab.Screen name="Check" component={QrStackScreen} options={{
+        tabBarIcon: ({ color, size, focused }) => (
+          <Icon
+            name={focused ? 'qr-code' : 'qr-code-outline'}
+            size={28}
+            color={focused ? '#f39200' : '#c0c0c0'}
+          />
         ),
-        tabBarActiveTintColor: '#95c11f',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: '#f39200',
+        tabBarInactiveTintColor: '#c0c0c0',
       }} />
-      <Tab.Screen name="Home" component={HomeStackScreen} options={{ tabBarIcon: ({ color, size }) => (<Icon name="home-outline" size={28} color="#1e110c" />), tabBarActiveTintColor: '#95c11f', tabBarInactiveTintColor: 'gray', }} />
-      <Tab.Screen name="Donar" component={DonationStackScreen} options={{ tabBarIcon: ({ color, size }) => (<Icon name="bag-check-outline" size={28} color="#f39200" />), tabBarActiveTintColor: '#95c11f', tabBarInactiveTintColor: 'gray' }} />
+      <Tab.Screen name="Gráficas" component={ChartStackScreen} options={{
+        tabBarIcon: ({ color, size, focused }) => (
+          <Icon
+            name={focused ? 'bar-chart' : 'bar-chart-outline'}
+            size={28}
+            color={focused ? '#f39200' : '#c0c0c0'}
+          />
+        ),
+        tabBarActiveTintColor: '#f39200',
+        tabBarInactiveTintColor: '#c0c0c0',
+      }} />
+      <Tab.Screen name="Inicio" component={HomeStackScreen} options={{
+        tabBarIcon: ({ color, size, focused }) => (
+          <Icon
+            name={focused ? 'home' : 'home-outline'}
+            size={size}
+            color={color}
+          />
+        ),
+        tabBarActiveTintColor: '#f39200',
+        tabBarInactiveTintColor: '#c0c0c0',
+      }} />
+      <Tab.Screen name="Donar" component={DonationStackScreen} options={{
+        tabBarIcon: ({ color, size, focused }) => (
+          <Icon
+            name={focused ? 'bag-check' : 'bag-check-outline'}
+            size={28}
+            color={focused ? '#f39200' : '#c0c0c0'}
+          />
+        ),
+        tabBarActiveTintColor: '#f39200',
+        tabBarInactiveTintColor: '#c0c0c0',
+      }} />
     </Tab.Navigator>
-    // </NavigationContainer>
   );
 };
 
-export default Routes;
+export default DrawerGroup;
+
+
