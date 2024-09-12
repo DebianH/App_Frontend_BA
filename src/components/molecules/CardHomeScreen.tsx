@@ -1,20 +1,18 @@
 import React from 'react';
 import { View, StyleSheet, Text, ImageSourcePropType, TouchableOpacity, Image } from 'react-native';
-import Icon from '../atoms/iconHomeScreen';
 
 interface CardProps {
-  iconSource: ImageSourcePropType;
-  title: string;
-  width?: number;   // Tamaño opcional para el ancho
-  height?: number;  // Tamaño opcional para la altura
+  iconSource: ImageSourcePropType; 
+  title: string; 
+  width?: number;  
+  height?: number;  
 }
 
 const Card: React.FC<CardProps> = ({ iconSource, title, width = 160, height = 200 }) => {
   return (
     <TouchableOpacity style={[styles.card, { width, height }]}>
       <Text style={styles.title}>{title}</Text>
-      {/* <Icon source={iconSource} /> */}
-      <Image source={iconSource} />
+      <Image source={iconSource} style={styles.image} />  
     </TouchableOpacity>
   );
 };
@@ -34,13 +32,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    marginVertical: 10, // Espaciado vertical entre tarjetas
+    marginVertical: 10,
   },
   title: {
     fontSize: 20,
     color: '#000',
-    marginBottom: 20,
+    marginBottom: 10,
     textAlign: "center"
+  },
+  image: {
+    width: '100%',
+    height: '70%',
+    resizeMode: 'contain',
   },
 });
 
