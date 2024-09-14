@@ -5,15 +5,15 @@ import Icon from '../atoms/iconHomeScreen';
 interface CardProps {
   iconSource: ImageSourcePropType;
   title: string;
-  width?: number;   // Tamaño opcional para el ancho
-  height?: number;  // Tamaño opcional para la altura
+  width?: number;
+  height?: number;
+  onPress?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ iconSource, title, width = 160, height = 200 }) => {
+const Card: React.FC<CardProps> = ({ iconSource, title, width = 160, height = 200, onPress }) => {
   return (
-    <TouchableOpacity style={[styles.card, { width, height }]}>
+    <TouchableOpacity style={[styles.card, { width, height }]} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
-      {/* <Icon source={iconSource} /> */}
       <Image source={iconSource} />
     </TouchableOpacity>
   );
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    marginVertical: 10, // Espaciado vertical entre tarjetas
+    marginVertical: 10,
   },
   title: {
     fontSize: 20,

@@ -1,13 +1,14 @@
-import React from "react";
-import { View, StyleSheet, ScrollView, Text, Button } from "react-native";
-import MainSection from "../organism/MainSectionHomeScreen";
-import NavigationBar from "../molecules/NavigationBar";
-import { SafeAreaView } from "react-native-safe-area-context";
-import NewsButton from "../atoms/newsHomeButton";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../routesNavigation/routesScreens";
+import React from 'react';
+import { View, StyleSheet, ScrollView, Text, Button } from 'react-native';
+import MainSection from '../organism/MainSectionHomeScreen';
+import NavigationBar from '../molecules/NavigationBar';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import NewsButton from '../atoms/newsHomeButton';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../routesNavigation/routesScreens';
 type NavigationProps = StackNavigationProp<RootStackParamList>;
+
 
 const HomeScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -18,7 +19,6 @@ const HomeScreen: React.FC = () => {
           <View style={styles.mainSection}>
             <Text style={styles.subtitle}>Hola, Jose Luis!</Text>
             <MainSection />
-            <Button title="Go to Details" />
           </View>
         </ScrollView>
       </View>

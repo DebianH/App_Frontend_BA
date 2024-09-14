@@ -6,7 +6,7 @@ interface ProfileButtonProps {
   onPress: () => void;
 }
 
-const ChartButton: React.FC<ProfileButtonProps> = ({ onPress }) => {
+const QrButton: React.FC<ProfileButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <View style={styles.iconTextContainer}>
