@@ -13,6 +13,7 @@ import DetailsScreen from '../Pages/NewBAPage';
 import QrScreenPage from '../Pages/QrScreenPage';
 import ProfileScreenPage from '../Pages/ProfileScreenPage';
 import LoyaltyScreenPage from '../Pages/LoyaltyScreenPage';
+import ValidationScreenPage from '../Pages/ValidationScreenPage';
 import Header from '../molecules/Header';
 // import HomeScreenPage from '../Pages/HomeScreenPage';
 // export type RootStackParamList = {
@@ -30,6 +31,7 @@ const HomeStack = createNativeStackNavigator();
 const DonationStack = createNativeStackNavigator();
 const ChartStack = createNativeStackNavigator();
 const LoyaltyStack = createNativeStackNavigator();
+const ValidationStack = createNativeStackNavigator();
 
 //Drawer
 const Drawer = createDrawerNavigator();
@@ -83,6 +85,18 @@ function LoyaltyStackScreen() {
       />
 
     </LoyaltyStack.Navigator>
+  );
+}
+function ValidationStackScreen() {
+  return (
+    <ValidationStack.Navigator>
+      <ValidationStack.Screen
+        name="Validation"
+        component={ValidationScreenPage}
+        options={{ headerShown: false, }}
+      />
+
+    </ValidationStack.Navigator>
   );
 }
 function QrStackScreen() {
@@ -168,6 +182,17 @@ function Routes() {
         tabBarInactiveTintColor: '#c0c0c0',
       }} />
        <Tab.Screen name="Loyalty" component={LoyaltyStackScreen} options={{
+        tabBarIcon: ({ color, size, focused }) => (
+          <Icon
+            name={focused ? 'bag-check' : 'bag-check-outline'}
+            size={28}
+            color={focused ? '#f39200' : '#c0c0c0'}
+          />
+        ),
+        tabBarActiveTintColor: '#f39200',
+        tabBarInactiveTintColor: '#c0c0c0',
+      }} />
+       <Tab.Screen name="Validation" component={ValidationStackScreen} options={{
         tabBarIcon: ({ color, size, focused }) => (
           <Icon
             name={focused ? 'bag-check' : 'bag-check-outline'}
