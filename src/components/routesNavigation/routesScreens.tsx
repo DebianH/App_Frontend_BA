@@ -32,7 +32,7 @@ const DonationStack = createNativeStackNavigator();
 const ChartStack = createNativeStackNavigator();
 const LoyaltyStack = createNativeStackNavigator();
 const ValidationStack = createNativeStackNavigator();
-
+const QrStack = createNativeStackNavigator();
 //Drawer
 const Drawer = createDrawerNavigator();
 
@@ -101,13 +101,13 @@ function ValidationStackScreen() {
 }
 function QrStackScreen() {
   return (
-    <ChartStack.Navigator>
-      <ChartStack.Screen
+    <QrStack.Navigator>
+      <QrStack.Screen
         name="Generar QR"
         component={QrScreenPage}
         options={{ headerShown: false, }}
       />
-    </ChartStack.Navigator>
+    </QrStack.Navigator>
   );
 }
 function DrawerGroup() {
