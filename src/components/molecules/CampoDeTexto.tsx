@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   sectionContainer: {
     marginBottom: 20,
     width: '100%',
+    bottom: 30
   } as ViewStyle,
   prompt: {
     fontSize: 16,

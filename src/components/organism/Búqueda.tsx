@@ -38,8 +38,8 @@ const Donaciones: React.FC<{
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    top: 90,
+    padding: 0,
+    top: 10,
     borderBottomColor: '#000000',
     borderBottomWidth: 1,
   },
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   reminder: {
     fontSize: 14,
-    color: '#555',
+    color: '#FF0000',
     marginBottom: 20,
   },
   searchBar: {

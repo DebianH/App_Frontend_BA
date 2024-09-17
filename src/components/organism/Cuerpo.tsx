@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, ViewStyle } from 'react-native';
-import Botón from '../atoms/Botón';
+import BotónNormal from '../atoms/BotónNormal';
 import CampoDeTexto from '../molecules/CampoDeTexto';
 import Imágen from '../atoms/Imágen';
 
@@ -16,8 +16,7 @@ const Datos: React.FC = () => {
       <CampoDeTexto prompt="Contactos" placeholder=" " />
       <CampoDeTexto prompt="Tipo de institución" placeholder=" " />
       <CampoDeTexto prompt="Sucursales" placeholder=" " />
-      
-      <Botón style={styles.button} />
+      <BotónNormal style={styles.button} textStyle={styles.buttonText}>Guardar</BotónNormal>
     </View>
   );
 };
@@ -29,6 +28,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFEEE',
     padding: 20,
+    top: 20,
   },
   title: {
     fontSize: 24,
@@ -39,15 +39,21 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 20,
     fontWeight: 'bold',
+    bottom: 40
   },
   image: {
     width: 100,
     height: 100,
     marginVertical: 20,
+    bottom: 30
   },
   button: {
     marginVertical: 20,
-    bottom: 10
+    bottom: 65
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
   },
 });
 

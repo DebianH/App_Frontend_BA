@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
+import { SafeAreaView, View, StyleSheet, ViewStyle, ImageStyle } from 'react-native';
 import BotónConTexto from '../molecules/BotónTexto'; 
 import Imágen from '../atoms/Imágen';
 const icon1 = require('../../assets/opcions.png');
 const icon2 = require('../../assets/mail.png');
 const logoImage = require('../../assets/BAQ-Logo.png');
-
 
 const iconStyles: { [key: string]: ImageStyle } = {
   mail: {
@@ -22,7 +21,7 @@ const Cabecera: React.FC<{
   containerStyle?: ViewStyle;
 }> = ({ containerStyle }) => {
   return (
-    <View style={[styles.container, containerStyle]}>
+    <SafeAreaView style={[styles.container, containerStyle]}>
       <View style={styles.buttonContainer}>
         <BotónConTexto icon={icon1} iconStyle={iconStyles.opciones} footerMode />
       </View>
@@ -32,7 +31,7 @@ const Cabecera: React.FC<{
       <View style={styles.buttonContainer}>
         <BotónConTexto icon={icon2} iconStyle={iconStyles.mail} footerMode />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -44,13 +43,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     height: 70,
     backgroundColor: '#FFFEEE',
-    position: 'absolute',
     borderBottomColor: '#000000',
     borderBottomWidth: 1,
-    top: 30,
-    left: 0,
-    right: 0,
     zIndex: 1000,
+    top: 30
   },
   buttonContainer: {
     marginHorizontal: 15,

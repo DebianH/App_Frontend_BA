@@ -1,4 +1,4 @@
-//Debe haber atomos por cada boton para asi poder hacer la Navegacion mas facil
+//Separa en mas botones para poder hacer la navegacion
 import React from 'react';
 import { TouchableOpacity, Text, Image, ImageBackground, StyleSheet, ViewStyle, TextStyle, ImageSourcePropType, GestureResponderEvent, ImageStyle } from 'react-native';
 
@@ -10,16 +10,19 @@ const Botón: React.FC<{
   onPress?: (event: GestureResponderEvent) => void;
   footerMode?: boolean; 
   iconStyle?: ImageStyle;
-}> = ({ style, textStyle, icon, backgroundImage, onPress, footerMode, iconStyle }) => {
+  children?: React.ReactNode; 
+}> = ({ style, textStyle, icon, backgroundImage, onPress, footerMode, iconStyle, children }) => {
   const buttonStyle = footerMode ? styles.footerButton : styles.button;
 
   if (backgroundImage) {
     return (
       <TouchableOpacity style={[buttonStyle, style]} onPress={onPress}>
         <ImageBackground source={backgroundImage} style={[styles.backgroundImage, buttonStyle]}>
-          icon ? (
+          {icon ? (
             <Image source={icon} style={[styles.icon, iconStyle]} />
-          )
+          ) : (
+            children
+          )}
         </ImageBackground>
       </TouchableOpacity>
     );
@@ -30,7 +33,7 @@ const Botón: React.FC<{
       {icon ? (
         <Image source={icon} style={[styles.icon, iconStyle]} />
       ) : (
-        <Text style={[styles.text, textStyle]}>{"Guardar Datos"}</Text>
+        children
       )}
     </TouchableOpacity>
   );

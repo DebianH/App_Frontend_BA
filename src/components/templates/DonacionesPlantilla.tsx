@@ -1,24 +1,23 @@
 import React from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
-import Cabecera from '../organism/Cabecera';
-import Donaciones from '../organism/Búqueda';
-import Botónes from '../organism/BotónesNavegación';
-
-const DatosPlantilla: React.FC<{ containerStyle?: ViewStyle }> = ({ containerStyle }) => {
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import Búsqueda from '../organism/Búqueda'
+import ProductosPrioritarios from '../organism/ProductosPrioritarios';
+import TodosLosProductos from '../organism/ListaProductos';
+const ProductosScreen = () => {
   return (
-    <View style={[styles.container, containerStyle]}>
-      <Cabecera />
-      <Donaciones />
-      <Botónes />
-    </View>
+    <ScrollView style={styles.container}>
+      <Búsqueda />
+      <ProductosPrioritarios />
+      <TodosLosProductos />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFEEE',
+    padding: 20,
   },
 });
 
-export default DatosPlantilla;
+export default ProductosScreen;
