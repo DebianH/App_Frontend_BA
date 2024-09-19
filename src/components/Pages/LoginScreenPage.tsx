@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LoginInput from "../molecules/LoginInput";
 import AuthButton from "../organism/AuthButton";
@@ -8,7 +8,10 @@ const LoginScreenPage: React.FC = () => {
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <View style={styles.container}>
-        <Logo logosource={require("../../assets/BAQ-Logo.png")} />
+        <Image
+          style={styles.logo}
+          source={require("../../assets/BAQ-Logo.png")}
+        />
         <LoginInput />
         <AuthButton />
       </View>
@@ -23,6 +26,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF",
+  },
+  logo: {
+    height: 120,
+    width: 300,
+    marginTop: 50,
+    alignSelf: "center",
   },
 });
 export default LoginScreenPage;

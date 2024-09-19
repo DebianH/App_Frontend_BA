@@ -5,16 +5,21 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreenPage from "../Pages/HomeScreenPage";
 import DonationScreenPage from "../Pages/DonationScreenPage";
 import ChartScreenPage from "../Pages/ChartUserScreenPage"; // Asegúrate de importar el componente correctamente
+import LoginScreenPage from "../Pages/LoginScreenPage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Icon from "react-native-vector-icons/Ionicons";
 import DetailsScreen from "../Pages/NewBAPage";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import QrScreenPage from "../Pages/QrScreenPage";
+import ScannerCameraQR from "../Pages/ScannerCameraQR";
 // import HomeScreenPage from '../Pages/HomeScreenPage';
 export type RootStackParamList = {
   HomeScreenPage: undefined;
   DonationScreenPage: undefined;
   ChartScreenPage: undefined;
+  LoginScreenPage: undefined;
+  QrScreenPage: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -24,7 +29,8 @@ const HomeStack = createNativeStackNavigator();
 // const HomeStack = createStackNavigator();
 const DonationStack = createNativeStackNavigator();
 const ChartStack = createNativeStackNavigator();
-
+const LoginStack = createNativeStackNavigator();
+const QrStack = createNativeStackNavigator();
 //Drawer
 const Drawer = createDrawerNavigator();
 
@@ -66,29 +72,46 @@ function ChartStackScreen() {
     </ChartStack.Navigator>
   );
 }
-function QrStackScreen() {
+function LoginStackScreen() {
   return (
-    <ChartStack.Navigator>
-      <ChartStack.Screen
-        name="Generar QR"
-        component={QrScreenPage}
+    <LoginStack.Navigator>
+      <LoginStack.Screen
+        name="Iniciar Sesion"
+        component={LoginScreenPage}
         options={{ headerShown: false }}
       />
-    </ChartStack.Navigator>
+    </LoginStack.Navigator>
   );
 }
-function DrawerGroup() {
-  return (
-    <Drawer.Navigator screenOptions={{ headerShown: false }}>
-      <Drawer.Screen
-        name="Profile"
-        component={ProfileScreenPage}
-        options={{ headerShown: true }}
-      />
-      <Drawer.Screen name="Routes" component={Routes} />
-    </Drawer.Navigator>
-  );
-}
+// function QrStackScreen() {
+//   return (
+//     <QrStack.Navigator>
+//       <QrStack.Screen
+//         name="Qr"
+//         component={QrScreenPage}
+//         options={{ headerShown: false }}
+//       />
+//       <QrStack.Screen
+//         name="Camera"
+//         component={ScannerCameraQR}
+//         options={{ headerShown: true }}
+//       />
+//     </QrStack.Navigator>
+//   );
+// }
+
+// function DrawerGroup() {
+//   return (
+//     <Drawer.Navigator screenOptions={{ headerShown: false }}>
+//       <Drawer.Screen
+//         name="Profile"
+//         component={ProfileScreenPage}
+//         options={{ headerShown: true }}
+//       />
+//       <Drawer.Screen name="Routes" component={Routes} />
+//     </Drawer.Navigator>
+//   );
+// }
 function Routes() {
   return (
     <Tab.Navigator
@@ -106,7 +129,7 @@ function Routes() {
         },
       }}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Check"
         component={QrStackScreen}
         options={{
@@ -120,10 +143,10 @@ function Routes() {
           tabBarActiveTintColor: "#f39200",
           tabBarInactiveTintColor: "#c0c0c0",
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Gráficas"
-        component={ChartStackScreen}
+        component={LoginStackScreen}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <Icon
@@ -166,8 +189,23 @@ function Routes() {
           tabBarInactiveTintColor: "#c0c0c0",
         }}
       />
+      <Tab.Screen
+        name="Scan QR"
+        component={QrScreenPage}
+        options={{
+          tabBarIcon: ({ color, size, focused }) => (
+            <Icon
+              name={focused ? "bag-check" : "bag-check-outline"}
+              size={28}
+              color={focused ? "#f39200" : "#c0c0c0"}
+            />
+          ),
+          tabBarActiveTintColor: "#f39200",
+          tabBarInactiveTintColor: "#c0c0c0",
+        }}
+      />
     </Tab.Navigator>
   );
 }
-
-export default DrawerGroup;
+export default Routes;
+// export default DrawerGroup;

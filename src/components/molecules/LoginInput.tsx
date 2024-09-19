@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import LoginButton from "../atoms/LoginButton";
 import RegisterButton from "../atoms/RegisterButton";
 import UserLogin from "../molecules/UserLogin";
@@ -8,15 +8,19 @@ import UsernameInput from "../atoms/UsernameInput";
 
 const LoginInput: React.FC = () => {
   return (
-    <View>
-      <View>
-        <Text> Usuario</Text>
-        <UsernameInput title=" Usuario" />
-        <Text> Contraseña</Text>
-        <UsernameInput title="Password" />
-      </View>
+    <View style={style.container}>
+      <Text> Usuario </Text>
+      <UsernameInput />
+      <Text> Contraseña </Text>
+      <UsernameInput />
     </View>
   );
 };
 
 export default LoginInput;
+const style = StyleSheet.create({
+  container: {
+    paddingLeft: 15,
+    marginTop: 40,
+  },
+});

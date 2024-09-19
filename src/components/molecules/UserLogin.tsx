@@ -3,13 +3,11 @@ import { View, StyleSheet } from "react-native";
 import LoginButton from "../atoms/LoginButton";
 import RegisterButton from "../atoms/RegisterButton";
 
-// <QrButton onPress={() => navigation.navigate("QrScreenPage")} />
-
 const UserLogin: React.FC = () => {
   return (
     <View style={styles.subcontainer}>
-      <LoginButton title="Iniciar Sesion" />
-      <RegisterButton title="Registrarme" />
+      <LoginButton />
+      <RegisterButton />
     </View>
   );
 };

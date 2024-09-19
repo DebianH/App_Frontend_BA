@@ -1,13 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
-import { ImageSource } from "react-native-vector-icons/Icon";
+import { View, StyleSheet, Image, ImageSourcePropType } from "react-native";
 interface LogoProps {
-  logosource: ImageSource;
+  logosource: ImageSourcePropType;
 }
 const Logo: React.FC<LogoProps> = ({ logosource }) => {
   return (
     <View>
-      {" "}
       <Image source={logosource} />
     </View>
   );

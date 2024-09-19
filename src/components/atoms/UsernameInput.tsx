@@ -1,10 +1,14 @@
 import React from "react";
 import { StyleSheet, TextInput } from "react-native";
-interface UsernameProps {
-  title: string;
-}
-const UsernameInput: React.FC<UsernameProps> = ({ title }) => {
-  return <TextInput style={styles.data} placeholder={title}></TextInput>;
+// interface UsernameProps {
+//   title: string;
+// }
+const UsernameInput: React.FC = () => {
+  return (
+    <TextInput style={styles.data} placeholder="...">
+      {" "}
+    </TextInput>
+  );
 };
 const styles = StyleSheet.create({
   data: {
