@@ -1,0 +1,28 @@
+{
+    "qualicationId": "C001",
+    "donationId": "1",
+    "donatorId": "1",
+    "organizationId": "1",
+    "calification": {
+        "qualityCalification": {
+            "score": 4,
+            "comments": "Buena calidad general nada en mal estado"
+        },
+        "timeCalification": {
+            "score": 5,
+            "comments": "Entrega a tiempo - opcional"
+        },
+        "packagingCalification": {
+            "score": 3,
+            "comments": "El empaquetado estaba OK"
+        },
+        "communicationCalification": {
+            "score": 4,
+            "comments": "Buena comunicación con el donador"
+        }
+    },
+    "generalScore": 4.0,
+    "notes": "Buen servicio?",
+    "createdAt": "2024-01-05T20:07:17.000Z",
+    "updatedAt": "2024-01-05T20:07:17.000Z"
+}
