@@ -2,17 +2,18 @@ import React from 'react';
 import { View, StyleSheet, Text, ImageSourcePropType, TouchableOpacity, Image } from 'react-native';
 
 interface CardProps {
-  iconSource: ImageSourcePropType; 
-  title: string; 
-  width?: number;  
-  height?: number;  
+  iconSource: ImageSourcePropType;
+  title: string;
+  width?: number;
+  height?: number;
+  onPress?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ iconSource, title, width = 160, height = 200 }) => {
+const Card: React.FC<CardProps> = ({ iconSource, title, width = 160, height = 200, onPress }) => {
   return (
-    <TouchableOpacity style={[styles.card, { width, height }]}>
+    <TouchableOpacity style={[styles.card, { width, height }]} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
-      <Image source={iconSource} style={styles.image} />  
+      <Image source={iconSource} />
     </TouchableOpacity>
   );
 };

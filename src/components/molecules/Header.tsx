@@ -1,29 +1,44 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, StyleSheet, Image, ImageSourcePropType, TouchableOpacity, Dimensions, SafeAreaView } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons'; // Usando Ionicons para ejemplo
-
+import { View, StyleSheet, Image, ImageSourcePropType, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useLayoutEffect } from 'react';
 interface HeaderProps {
-  logoSource: ImageSourcePropType; // Define el tipo para la fuente de la imagen
+  logoSource: ImageSourcePropType;
   title: string;
 }
 
 const { width, height } = Dimensions.get('window');
 
-const Header: React.FC<HeaderProps> = ({ logoSource, title }) => (
+const Header: React.FC<HeaderProps> = ({ logoSource, title }) => {
+  // const navigation = useNavigation();
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerLeft: () => (
+  //       <Pressable onPress={() => navigation.openDrawer()} style={styles.iconContainerLeft}>
+  //         <Icon name="menu" size={35} color="black" />
+  //       </Pressable>
+  //     )
+  //   })
+  // }, []);
   // Distancia de encabezado revisar
-  <View style={{ marginTop: height * 0.03 }} >
-    <View style={styles.header}>
-      <TouchableOpacity onPress={() => {/* Lógica para el menú */ }} style={styles.iconContainerLeft}>
-        <Icon name="menu" size={35} color="black" />
-      </TouchableOpacity>
-      <Image source={logoSource} style={styles.logo} />
-      <TouchableOpacity onPress={() => {/* Lógica para los mensajes */ }} style={styles.iconContainerRight}>
-        <Icon name="chatbox-ellipses-outline" size={35} color="black" />
-      </TouchableOpacity>
-    </View>
-    <View style={styles.line} />
-  </View>
-);
+  return (
+    <SafeAreaView >
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.iconContainerLeft}>
+          <Icon name="menu" size={35} color="black" />
+        </TouchableOpacity>
+        <Image source={logoSource} style={styles.logo} />
+        <TouchableOpacity onPress={() => {/* Lógica para los mensajes */ }} style={styles.iconContainerRight}>
+          <Icon name="chatbox-ellipses-outline" size={35} color="black" />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.line} />
+    </SafeAreaView>
+  )
+
+};
 
 const styles = StyleSheet.create({
   header: {
