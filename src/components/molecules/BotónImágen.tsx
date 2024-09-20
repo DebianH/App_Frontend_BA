@@ -1,15 +1,20 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import Botón from '../atoms/Botón';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Imágen from '../atoms/Imágen';
 
-const BotonImagen: React.FC<{ icon: any, text: string }> = ({ icon, text }) => {
+interface BotonImagenProps {
+  icon: any;
+  text: string;
+  onPress: () => void;
+}
+
+const BotonImagen: React.FC<BotonImagenProps> = ({ icon, text, onPress }) => {
   return (
     <View style={styles.container}>
-      <Botón style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={onPress}>
         <Text style={styles.text}>{text}</Text>
         <Imágen source={icon} style={styles.icon} />
-      </Botón>
+      </TouchableOpacity>
     </View>
   );
 };
