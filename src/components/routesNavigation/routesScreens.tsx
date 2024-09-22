@@ -12,8 +12,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DetailsScreen from '../Pages/NewBAPage';
 import QrScreenPage from '../Pages/QrScreenPage';
 import ProfileScreenPage from '../Pages/ProfileScreenPage';
-import LoyaltyScreenPage from '../Pages/LoyaltyScreenPage';
-import ValidationScreenPage from '../Pages/ValidationScreenPage';
 import Header from '../molecules/Header';
 // import HomeScreenPage from '../Pages/HomeScreenPage';
 // export type RootStackParamList = {
@@ -30,9 +28,7 @@ const HomeStack = createNativeStackNavigator();
 // const HomeStack = createStackNavigator();
 const DonationStack = createNativeStackNavigator();
 const ChartStack = createNativeStackNavigator();
-const LoyaltyStack = createNativeStackNavigator();
-const ValidationStack = createNativeStackNavigator();
-const QrStack = createNativeStackNavigator();
+
 //Drawer
 const Drawer = createDrawerNavigator();
 
@@ -75,39 +71,15 @@ function ChartStackScreen() {
     </ChartStack.Navigator>
   );
 }
-function LoyaltyStackScreen() {
-  return (
-    <LoyaltyStack.Navigator>
-      <LoyaltyStack.Screen
-        name="Loyalty"
-        component={LoyaltyScreenPage}
-        options={{ headerShown: false, }}
-      />
-
-    </LoyaltyStack.Navigator>
-  );
-}
-function ValidationStackScreen() {
-  return (
-    <ValidationStack.Navigator>
-      <ValidationStack.Screen
-        name="Validation"
-        component={ValidationScreenPage}
-        options={{ headerShown: false, }}
-      />
-
-    </ValidationStack.Navigator>
-  );
-}
 function QrStackScreen() {
   return (
-    <QrStack.Navigator>
-      <QrStack.Screen
+    <ChartStack.Navigator>
+      <ChartStack.Screen
         name="Generar QR"
         component={QrScreenPage}
         options={{ headerShown: false, }}
       />
-    </QrStack.Navigator>
+    </ChartStack.Navigator>
   );
 }
 function DrawerGroup() {
@@ -147,7 +119,6 @@ function Routes() {
         tabBarActiveTintColor: '#f39200',
         tabBarInactiveTintColor: '#c0c0c0',
       }} />
-     
       <Tab.Screen name="Gráficas" component={ChartStackScreen} options={{
         tabBarIcon: ({ color, size, focused }) => (
           <Icon
@@ -171,28 +142,6 @@ function Routes() {
         tabBarInactiveTintColor: '#c0c0c0',
       }} />
       <Tab.Screen name="Donar" component={DonationStackScreen} options={{
-        tabBarIcon: ({ color, size, focused }) => (
-          <Icon
-            name={focused ? 'bag-check' : 'bag-check-outline'}
-            size={28}
-            color={focused ? '#f39200' : '#c0c0c0'}
-          />
-        ),
-        tabBarActiveTintColor: '#f39200',
-        tabBarInactiveTintColor: '#c0c0c0',
-      }} />
-       <Tab.Screen name="Loyalty" component={LoyaltyStackScreen} options={{
-        tabBarIcon: ({ color, size, focused }) => (
-          <Icon
-            name={focused ? 'bag-check' : 'bag-check-outline'}
-            size={28}
-            color={focused ? '#f39200' : '#c0c0c0'}
-          />
-        ),
-        tabBarActiveTintColor: '#f39200',
-        tabBarInactiveTintColor: '#c0c0c0',
-      }} />
-       <Tab.Screen name="Validation" component={ValidationStackScreen} options={{
         tabBarIcon: ({ color, size, focused }) => (
           <Icon
             name={focused ? 'bag-check' : 'bag-check-outline'}
