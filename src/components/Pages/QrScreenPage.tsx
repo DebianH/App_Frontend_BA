@@ -8,6 +8,7 @@ import {
   Button,
   TouchableOpacity,
   Linking,
+  Alert,
   Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -15,22 +16,24 @@ import { useNavigation } from "@react-navigation/native";
 import { useCameraPermissions, CameraView, CameraType } from "expo-camera";
 import { StatusBar } from "expo-status-bar";
 export default function QrScreenPage() {
-  const navigation = useNavigation();
   const [permisos, setPermisos] = useCameraPermissions();
   setPermisos();
   const isValidUrl = (url) => {
     const regex = /^(ftp|http|https):\/\/[^ "]+$/;
     return regex.test(url);
   };
-
+  const handleBarCodeScanned = ({ data }) => {
+    if (!isValidUrl(data)) {
+      Alert.alert("Error", "Código QR no contiene una URL válida");
+    }
+    Linking.openURL(data);
+  };
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <CameraView
         style={StyleSheet.absoluteFill}
         facing="back"
-        onBarcodeScanned={({ datos }) => {
-          Linking.openURL(datos);
-        }}
+        onBarcodeScanned={handleBarCodeScanned}
       />
     </SafeAreaView>
   );
