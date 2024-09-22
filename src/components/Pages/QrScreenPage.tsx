@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
 });
 
 export default QrScreenPage; */
-
+/*
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -239,4 +239,185 @@ const styles = StyleSheet.create({
     color: 'red',
     marginTop: 10,
   },
+}); */
+/*
+import React, { useEffect, useState } from 'react';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
+
+// Definición de tipos para la respuesta de la API
+interface Calification {
+  id: number;
+  score: number;
+  comments: string;
+}
+
+interface ApiResponse {
+  id: number;
+  donationId: string;
+  donatorId: string;
+  organizationId: string;
+  qualityCalificationId: number;
+  timeCalificationId: number;
+  packagingCalificationId: number;
+  communicationCalificationId: number;
+  generalScore: number;
+  notes: string;
+  createdAt: string;
+  updatedAt: string;
+  qualityCalification: Calification;
+  timeCalification: Calification;
+  packagingCalification: Calification;
+  communicationCalification: Calification;
+}
+
+const QRCodeScreen: React.FC = () => {
+  const [data, setData] = useState<ApiResponse | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://loyalty-zetta.vercel.app/api/qualifications/5');
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const result = await response.json();
+        setData(result.response);  // Guarda solo la parte de la respuesta que interesa
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.centered}>
+        <Text>Error: {error}</Text>
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Calificación QR</Text>
+      {data && (
+        <QRCode
+          value={JSON.stringify(data)}
+          size={250}
+        />
+      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: '#f0f0f0',
+  },
+  centered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
 });
+
+export default QRCodeScreen; */
+import React, { useEffect, useState } from 'react';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import SvgQRCode from 'react-native-qrcode-svg';
+
+const QRCodeScreen = () => {
+  const [qrData, setQrData] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Fetch data from the endpoint
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://loyalty-zetta.vercel.app/api/qualifications/5');
+        const json = await response.json();
+
+        if (json.status === 200) {
+          const { donationId, donatorId, organizationId } = json.response;
+          // Concatenate the relevant IDs into a string
+          const qrString = `Donation ID: ${donationId}, Donator ID: ${donatorId}, Organization ID: ${organizationId}`;
+          setQrData(qrString);
+        } else {
+          setError('Failed to fetch data');
+        }
+      } catch (err) {
+        setError('Error fetching data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.centered}>
+        <Text style={styles.errorText}>{error}</Text>
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.centered}>
+      {qrData ? (
+        <>
+          <Text>QR Code for the qualification:</Text>
+          <SvgQRCode value={qrData} size={200} />
+        </>
+      ) : (
+        <Text>No data available to generate QR code.</Text>
+      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  centered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorText: {
+    color: 'red',
+  },
+});
+
+export default QRCodeScreen;
