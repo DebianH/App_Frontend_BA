@@ -25,21 +25,18 @@ const DonationScreenPage: React.FC = () => {
   // Array de nombres o títulos
   const titles = [
     'Frutas',
-    'Categoría 2',
-    'Categoría 3',
-    'Categoría 4',
-    'Categoría 5',
-    'Categoría 6',
-    'Categoría 7',
-    'Categoría 8',
+    'Embutidos',
+    'Agua',
+    'Cereales',
+    'Carnes',
+    'Vegetales',
+    'Comidas',
+    'Otros',
   ];
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.mainSection}>
-        {/* <Text style={styles.subtitle}>
-          ¿Qué vamos a donar hoy?
-        </Text> */}
         <View style={styles.cardsContainer}>
           {titles.map((title, index) => (
             <Card
@@ -62,23 +59,15 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#FFF',
   },
-  // subtitle: {
-  //   fontSize: 24,
-  //   color: '#000',
-  //   flex: 1,
-  //   textAlign: 'center',
-  //   marginTop: 25,
-  //   marginBottom: 10,
-  //   fontWeight: 'bold',
-  // },
+
   mainSection: {
-    transform: [{ translateY: -10 }],
+    transform: [{ translateY: -0 }], // Ajustar el valor según sea necesario
   },
   cardsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    padding: 10,
+    // padding: 10,
     // Ajustar padding o agregar margin aquí si es necesario
   },
 });
