@@ -1,10 +1,9 @@
 // rutasDeScreens.tsx
 import React from 'react';
-import { View } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { View, Image } from 'react-native';
 import HomeScreenPage from '../Pages/HomeScreenPage';
 import DonationScreenPage from '../Pages/DonationScreenPage';
-import ChartScreenPage from '../Pages/ChartUserScreenPage'; // Asegúrate de importar el componente correctamente
+import ChartScreenPage from '../Pages/ChartUserScreenPage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -12,7 +11,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DetailsScreen from '../Pages/NewBAPage';
 import QrScreenPage from '../Pages/QrScreenPage';
 import ProfileScreenPage from '../Pages/ProfileScreenPage';
-import Header from '../molecules/Header';
 // import HomeScreenPage from '../Pages/HomeScreenPage';
 // export type RootStackParamList = {
 //   HomeScreenPage: undefined;
@@ -54,8 +52,8 @@ function DonationStackScreen() {
       <DonationStack.Screen
         name="¿Qué vamos a donar hoy?"
         component={DonationScreenPage}
+        options={{ headerShown: true, }}
       />
-
     </DonationStack.Navigator>
   );
 }
@@ -67,7 +65,6 @@ function ChartStackScreen() {
         component={ChartScreenPage}
         options={{ headerShown: false, }}
       />
-
     </ChartStack.Navigator>
   );
 }
@@ -84,16 +81,43 @@ function QrStackScreen() {
 }
 function DrawerGroup() {
   return (
-    <Drawer.Navigator screenOptions={{ headerShown: false }}>
+    <Drawer.Navigator initialRouteName='Routes' screenOptions={{ headerShown: false }}>
+      <Drawer.Screen name='Profile' component={ProfileScreenPage} options={{ headerShown: true, headerTitle: 'Mi Perfil', }} />
+      <Drawer.Screen name='Routes' component={Routes}
+        options={{
+          headerShown: true,
+          headerStyle: {
+            height: 100,
+            elevation: 10,
+            shadowColor: '#A9A9A9',
+            shadowOpacity: 0.5,
+            shadowRadius: 10,
+          },
+          headerTitle: () => (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+              <Image
+                source={require('../../assets/BAQ-Logo.png')}
+                style={{ width: 120, height: 50 }}
+                resizeMode="contain"
+              />
+            </View>
+          ),
+          headerTitleAlign: 'center',
+          headerRight: () => (
+            <Icon
+              name='id-card-outline'
+              size={28}
+              color='black'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }} />
 
-      <Drawer.Screen name='Profile' component={ProfileScreenPage} options={{ headerShown: true }} />
-      <Drawer.Screen name='Routes' component={Routes} />
     </Drawer.Navigator>
   )
 }
 function Routes() {
   return (
-
     <Tab.Navigator
       initialRouteName='Inicio'
       screenOptions={{
@@ -118,6 +142,7 @@ function Routes() {
         ),
         tabBarActiveTintColor: '#f39200',
         tabBarInactiveTintColor: '#c0c0c0',
+        // tabBarLabel: 'Check',
       }} />
       <Tab.Screen name="Gráficas" component={ChartStackScreen} options={{
         tabBarIcon: ({ color, size, focused }) => (

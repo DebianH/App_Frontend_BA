@@ -9,18 +9,18 @@ import { useNavigation } from '@react-navigation/native';
 const HomeScreen = () => {
   return (
 
-    <SafeAreaView style={styles.SafeAreaView}>
+    <View style={styles.SafeAreaView}>
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
-          <View style={styles.mainSection}>
+          <View >
             <Text style={styles.subtitle}>
-              Hola, Jose Luis!
+              Hola!, Jose Luis!
             </Text>
             <MainSection />
           </View>
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     color: '#000',
     flex: 1,
     textAlign: 'center',
-    marginTop: 25,
+    marginTop: 10,
     marginBottom: 10,
     fontWeight: 'bold',
   },
@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   // Aplica el desplazamiento solo al contenedor de MainSection
-  mainSection: {
-    transform: [{ translateY: -10 }],  // Ajusta el valor según sea necesario
-  },
+  // mainSection: {
+  //   transform: [{ translateY: -10 }],  // Ajusta el valor según sea necesario
+  // },
 });
 
 export default HomeScreen;

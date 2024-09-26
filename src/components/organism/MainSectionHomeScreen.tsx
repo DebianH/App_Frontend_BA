@@ -1,4 +1,3 @@
-// src/organism/MainSectionHomeScreen.tsx
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Card from '../molecules/CardHomeScreen';
@@ -10,12 +9,15 @@ const MainSection: React.FC = () => {
   const handlePressDetails = () => {
     navigate('Noticias');
   };
+  const handleDonation = () => {
+    navigate('Donar');
+  };
   return (
     <View style={styles.section}>
       <CardImage
         iconSource={require('../../assets/homeMain.jpg')}
         buttonTitle="Donar"
-        onButtonPress={() => { }}
+        onButtonPress={handleDonation}
       />
       <View style={styles.cardContainer}>
         <Card
