@@ -8,6 +8,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
+// import Icons from 'react-native-vector-icons/Carbon';
+
 import DetailsScreen from '../Pages/NewBAPage';
 import QrScreenPage from '../Pages/QrScreenPage';
 import ProfileScreenPage from '../Pages/ProfileScreenPage';
@@ -82,10 +84,25 @@ function QrStackScreen() {
 function DrawerGroup() {
   return (
     <Drawer.Navigator initialRouteName='Routes' screenOptions={{ headerShown: false }}>
-      <Drawer.Screen name='Profile' component={ProfileScreenPage} options={{ headerShown: true, headerTitle: 'Mi Perfil', }} />
+      <Drawer.Screen
+        name='Profile'
+        component={ProfileScreenPage}
+        options={{
+          headerShown: true,
+          headerTitle: 'Mi Perfil',
+          headerTitleAlign: 'center',
+          drawerLabel: 'Mi Perfil',
+          drawerIcon: ({ color, size }) => (
+            <Icon name="person-circle-outline" size={28} color={"black"} />
+          ),
+        }} />
       <Drawer.Screen name='Routes' component={Routes}
         options={{
           headerShown: true,
+          drawerLabel: 'Inicio',
+          drawerIcon: ({ color, size }) => (
+            <Icon name="home-outline" size={28} color={"black"} />
+          ),
           headerStyle: {
             height: 100,
             elevation: 10,
