@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import QRCode from 'react-qr-code';
@@ -18,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MoleculeQRCodeDisplay;
+export default MoleculeQRCodeDisplay;*/

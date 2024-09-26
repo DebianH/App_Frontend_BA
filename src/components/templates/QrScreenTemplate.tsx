@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import QRContent from '../organism/QRContent';
@@ -39,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TemplateQRScreen;
+export default TemplateQRScreen; */

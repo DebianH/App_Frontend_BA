@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import AtomText from '../atoms/qrText';
@@ -34,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OrganismQRContent;
+export default OrganismQRContent; */

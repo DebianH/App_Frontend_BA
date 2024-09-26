@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import AtomButton from '../atoms/qrButton';
@@ -36,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MoleculeSlider;
+export default MoleculeSlider;*/

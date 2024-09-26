@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
@@ -37,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AtomButton;
+export default AtomButton;*/

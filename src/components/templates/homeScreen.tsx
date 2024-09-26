@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
-import Header from '../molecules/Header';
+//import Header from '../molecules/Header';
 import MainSection from '../organism/MainSectionHomeScreen';
 //import NavigationBar from '../molecules/NavigationBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,10 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const HomeScreen: React.FC = () => (
   <SafeAreaView style={styles.SafeAreaView}>
     <View style={styles.container}>
-      <Header
-        logoSource={require('../../assets/BAQ-Logo.png')}
-        title="Banco"
-      />
+    
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.mainSection}>
           <Text style={styles.subtitle}>

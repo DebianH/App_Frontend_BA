@@ -7,10 +7,10 @@ import { useNavigation } from '@react-navigation/native';
 const MainSection: React.FC = () => {
   const { navigate } = useNavigation();
   const handlePressDetails = () => {
-    navigate('Noticias');
+    //navigate('Noticias');
   };
   const handleDonation = () => {
-    navigate('Donar');
+    //navigate('Donar');
   };
   return (
     <View style={styles.section}>

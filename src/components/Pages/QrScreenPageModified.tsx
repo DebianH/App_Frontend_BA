@@ -1,35 +1,80 @@
+/*
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import QrScreenTemplate from '../templates/QrScreenTemplate';
 
-import React from 'react';
-import { View, StyleSheet, ScrollView, Text, Button } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-export default function QrScreenPage() {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.subtitle}>QrScreenPage</Text>
-        </View>
-    );
-}
+const QrScreenPage: React.FC = () => {
+  const [selectedOption, setSelectedOption] = useState<'generate' | 'scan'>('generate');
+  const [qrData, setQrData] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const generateQR = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('https://loyalty-zetta.vercel.app/api/qualificationsIDs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error en la respuesta del servidor');
+      }
+
+      const json = await response.json();
+      if (json.response && Array.isArray(json.response)) {
+        const ids = json.response.map((item: { id: number }) => item.id).join(', ');
+        setQrData(`IDs de calificación: ${ids}`);
+      } else {
+        setError('No se pudo generar el QR');
+      }
+    } catch (error) {
+      setError('Error al generar el QR');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const scanQR = () => {
+    setSelectedOption('scan');
+  };
+
+  return (
+    <SafeAreaView style={styles.SafeAreaView}>
+      <QrScreenTemplate
+        loading={loading}
+        qrData={qrData}
+        error={error}
+        selectedOption={selectedOption}
+        generateQR={() => {
+          setSelectedOption('generate');
+          generateQR();
+        }}
+        scanQR={scanQR}
+      />
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
-    subtitle: {
-        fontSize: 24,
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#FFF',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-}); 
+  SafeAreaView: {
+    flex: 1,
+  },
+});
 
-/* //error, no sale el qr
+export default QrScreenPage; */
+/*
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import QRCode from 'react-native-qrcode-svg';
 import loyaltyData from '../../assets/loyalty.json'; 
+
 // Define the TypeScript type for qualification data
 interface QualificationData {
   id: number;
@@ -57,15 +102,18 @@ interface QualificationData {
   createdAt: string;
   updatedAt: string;
 }
+
 export default function QrScreenPage() {
   // Initialize state with the correct type or null
   const [showQRCode, setShowQRCode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [productData, setProductData] = useState<QualificationData | null>(null);
+
   const fetchQualificationData = async () => {
     setLoading(true);
     setError(null);
+
     try {
       const response = await fetch('https://loyalty-zetta.vercel.app/api/qualifications/5', {
         method: 'POST',
@@ -74,7 +122,9 @@ export default function QrScreenPage() {
         },
         body: JSON.stringify({}),
       });
+
       const json = await response.json();
+
       if (json.status === 200 && json.response) {
         const qualificationData: QualificationData = {
           id: json.response.id,
@@ -102,6 +152,7 @@ export default function QrScreenPage() {
           createdAt: json.response.createdAt,
           updatedAt: json.response.updatedAt,
         };
+
         setProductData(qualificationData); // Set fetched data in state
         setShowQRCode(true); // Show the QR code after data is fetched
       } else {
@@ -114,10 +165,12 @@ export default function QrScreenPage() {
       setLoading(false);
     }
   };
+
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <View style={styles.container}>
         <Text style={styles.subtitle}>Banco de Alimentos</Text>
+
         <View style={styles.qrBox}>
           {loading ? (
             <ActivityIndicator size="large" color="#000" />
@@ -127,7 +180,9 @@ export default function QrScreenPage() {
             <View style={styles.emptyBox} />
           )}
         </View>
+
         {error && <Text style={styles.errorText}>{error}</Text>}
+
         <TouchableOpacity style={styles.button} onPress={fetchQualificationData}>
           <Text style={styles.buttonText}>Generar QR</Text>
         </TouchableOpacity>
@@ -135,6 +190,7 @@ export default function QrScreenPage() {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   SafeAreaView: {
     flex: 1,
@@ -184,20 +240,128 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 }); */
-/* //error fetching data
+/*
+import React, { useEffect, useState } from 'react';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
+
+// Definición de tipos para la respuesta de la API
+interface Calification {
+  id: number;
+  score: number;
+  comments: string;
+}
+
+interface ApiResponse {
+  id: number;
+  donationId: string;
+  donatorId: string;
+  organizationId: string;
+  qualityCalificationId: number;
+  timeCalificationId: number;
+  packagingCalificationId: number;
+  communicationCalificationId: number;
+  generalScore: number;
+  notes: string;
+  createdAt: string;
+  updatedAt: string;
+  qualityCalification: Calification;
+  timeCalification: Calification;
+  packagingCalification: Calification;
+  communicationCalification: Calification;
+}
+
+const QRCodeScreen: React.FC = () => {
+  const [data, setData] = useState<ApiResponse | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://loyalty-zetta.vercel.app/api/qualifications/5');
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const result = await response.json();
+        setData(result.response);  // Guarda solo la parte de la respuesta que interesa
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.centered}>
+        <Text>Error: {error}</Text>
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Calificación QR</Text>
+      {data && (
+        <QRCode
+          value={JSON.stringify(data)}
+          size={250}
+        />
+      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: '#f0f0f0',
+  },
+  centered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+});
+
+export default QRCodeScreen; */
+/*
 import React, { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import SvgQRCode from 'react-native-qrcode-svg';
+
 const QRCodeScreen = () => {
   const [qrData, setQrData] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     // Fetch data from the endpoint
     const fetchData = async () => {
       try {
         const response = await fetch('https://loyalty-zetta.vercel.app/api/qualifications/5');
         const json = await response.json();
+
         if (json.status === 200) {
           const { donationId, donatorId, organizationId } = json.response;
           // Concatenate the relevant IDs into a string
@@ -212,8 +376,10 @@ const QRCodeScreen = () => {
         setLoading(false);
       }
     };
+
     fetchData();
   }, []);
+
   if (loading) {
     return (
       <View style={styles.centered}>
@@ -221,6 +387,7 @@ const QRCodeScreen = () => {
       </View>
     );
   }
+
   if (error) {
     return (
       <View style={styles.centered}>
@@ -228,6 +395,7 @@ const QRCodeScreen = () => {
       </View>
     );
   }
+
   return (
     <View style={styles.centered}>
       {qrData ? (
@@ -241,6 +409,7 @@ const QRCodeScreen = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   centered: {
     flex: 1,
@@ -251,55 +420,5 @@ const styles = StyleSheet.create({
     color: 'red',
   },
 });
-export default QRCodeScreen; */
-/*
-const fetchQualificationData = async () => {
-    setLoading(true); // Muestra el indicador de carga al iniciar la solicitud
-    setError(null); // Reinicia el error al iniciar la solicitud
-  
-    try {
-      const response = await fetch('https://loyalty-zetta.vercel.app/api/qualifications/5');
-      const json = await response.json(); // Convierte la respuesta a JSON
-  
-      console.log('Fetched data:', json); // Depuración de la respuesta
-  
-      if (json.status === 200 && json.response) {
-        const qualificationData = {
-          id: json.response.id,
-          donationId: json.response.donationId,
-          donatorId: json.response.donatorId,
-          organizationId: json.response.organizationId,
-          qualityCalification: {
-            score: json.response.qualityCalification.score,
-            comments: json.response.qualityCalification.comments,
-          },
-          timeCalification: {
-            score: json.response.timeCalification.score,
-            comments: json.response.timeCalification.comments,
-          },
-          packagingCalification: {
-            score: json.response.packagingCalification.score,
-            comments: json.response.packagingCalification.comments,
-          },
-          communicationCalification: {
-            score: json.response.communicationCalification.score,
-            comments: json.response.communicationCalification.comments,
-          },
-          generalScore: json.response.generalScore,
-          notes: json.response.notes,
-          createdAt: json.response.createdAt,
-          updatedAt: json.response.updatedAt,
-        };
-  
-        setProductData(qualificationData); // Asigna los datos obtenidos
-      } else {
-        setError('No se pudo obtener la calificación');
-      }
-    } catch (error) {
-      console.error('Error fetching qualification data:', error);
-      setError('Error al cargar los datos');
-    } finally {
-      setLoading(false); // Oculta el indicador de carga al finalizar
-    }
-  }; */
-  
+
+export default QRCodeScreen;*/
