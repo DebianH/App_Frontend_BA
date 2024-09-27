@@ -64,39 +64,4 @@ const styles = StyleSheet.create({
     marginTop: 2,
     alignItems: "center",
   },
-  // subcontainer: {
-  //   flexDirection: "row",
-  //   justifyContent: "space-between",
-  // },
-  // button2: {
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   backgroundColor: "#ff00ff",
-  //   borderRadius: 20,
-  //   borderStyle: "solid",
-  //   borderBlockColor: "#000",
-  //   marginTop: 20,
-  //   borderColor: "#000",
-  // },
-  // buttonText2: {
-  //   fontSize: 12,
-  //   color: "#000000",
-  //   marginTop: 2,
-  //   alignItems: "center",
-  // },
-  // image: {
-  //   width: 300,
-  //   height: 300,
-  //   marginBottom: 20,
-  // },
 });
-{
-  /* <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate("Camera");
-          }}
-        >
-          <Text style={styles.buttonText}> Escanear QR</Text>
-        </TouchableOpacity> */
-}

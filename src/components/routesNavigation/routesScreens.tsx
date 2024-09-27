@@ -1,18 +1,22 @@
 // rutasDeScreens.tsx
 import React from "react";
-import { View } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { View, Image } from "react-native";
 import HomeScreenPage from "../Pages/HomeScreenPage";
 import DonationScreenPage from "../Pages/DonationScreenPage";
-import ChartScreenPage from "../Pages/ChartUserScreenPage"; // Asegúrate de importar el componente correctamente
-import LoginScreenPage from "../Pages/LoginScreenPage";
+import ChartScreenPage from "../Pages/ChartUserScreenPage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Icon from "react-native-vector-icons/Ionicons";
-import DetailsScreen from "../Pages/NewBAPage";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import QrScreenPage from "../Pages/QrScreenPage";
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
+import Icon from "react-native-vector-icons/Ionicons";
+// import Icons from 'react-native-vector-icons/Carbon';
 import ScannerCameraQR from "../Pages/ScannerCameraQR";
+import DetailsScreen from "../Pages/NewBAPage";
+import QrScreenPage from "../Pages/QrScreenPage";
+import ProfileScreenPage from "../Pages/ProfileScreenPage";
+import LoginScreenPage from "../Pages/LoginScreenPage";
 // import HomeScreenPage from '../Pages/HomeScreenPage';
 export type RootStackParamList = {
   HomeScreenPage: undefined;
@@ -22,7 +26,7 @@ export type RootStackParamList = {
   QrScreenPage: undefined;
 };
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -57,6 +61,7 @@ function DonationStackScreen() {
       <DonationStack.Screen
         name="¿Qué vamos a donar hoy?"
         component={DonationScreenPage}
+        options={{ headerShown: true }}
       />
     </DonationStack.Navigator>
   );
@@ -83,35 +88,70 @@ function LoginStackScreen() {
     </LoginStack.Navigator>
   );
 }
-// function QrStackScreen() {
-//   return (
-//     <QrStack.Navigator>
-//       <QrStack.Screen
-//         name="Qr"
-//         component={QrScreenPage}
-//         options={{ headerShown: false }}
-//       />
-//       <QrStack.Screen
-//         name="Camera"
-//         component={ScannerCameraQR}
-//         options={{ headerShown: true }}
-//       />
-//     </QrStack.Navigator>
-//   );
-// }
-
-// function DrawerGroup() {
-//   return (
-//     <Drawer.Navigator screenOptions={{ headerShown: false }}>
-//       <Drawer.Screen
-//         name="Profile"
-//         component={ProfileScreenPage}
-//         options={{ headerShown: true }}
-//       />
-//       <Drawer.Screen name="Routes" component={Routes} />
-//     </Drawer.Navigator>
-//   );
-// }
+function DrawerGroup() {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Routes"
+      screenOptions={{ headerShown: false }}
+    >
+      <Drawer.Screen
+        name="Profile"
+        component={ProfileScreenPage}
+        options={{
+          headerShown: true,
+          headerTitle: "Mi Perfil",
+          headerTitleAlign: "center",
+          drawerLabel: "Mi Perfil",
+          drawerIcon: ({ color, size }) => (
+            <Icon name="person-circle-outline" size={28} color={"black"} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Routes"
+        component={Routes}
+        options={{
+          headerShown: true,
+          drawerLabel: "Inicio",
+          drawerIcon: ({ color, size }) => (
+            <Icon name="home-outline" size={28} color={"black"} />
+          ),
+          headerStyle: {
+            height: 100,
+            elevation: 10,
+            shadowColor: "#A9A9A9",
+            shadowOpacity: 0.5,
+            shadowRadius: 10,
+          },
+          headerTitle: () => (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                source={require("../../assets/BAQ-Logo.png")}
+                style={{ width: 120, height: 50 }}
+                resizeMode="contain"
+              />
+            </View>
+          ),
+          headerTitleAlign: "center",
+          headerRight: () => (
+            <Icon
+              name="id-card-outline"
+              size={28}
+              color="black"
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+    </Drawer.Navigator>
+  );
+}
 function Routes() {
   return (
     <Tab.Navigator
@@ -129,9 +169,9 @@ function Routes() {
         },
       }}
     >
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Check"
-        component={QrStackScreen}
+        component={ScannerCameraQR}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <Icon
@@ -142,11 +182,12 @@ function Routes() {
           ),
           tabBarActiveTintColor: "#f39200",
           tabBarInactiveTintColor: "#c0c0c0",
+          // tabBarLabel: 'Check',
         }}
-      /> */}
+      />
       <Tab.Screen
         name="Gráficas"
-        component={LoginStackScreen}
+        component={ChartStackScreen}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <Icon
@@ -177,21 +218,6 @@ function Routes() {
       <Tab.Screen
         name="Donar"
         component={DonationStackScreen}
-        options={{
-          tabBarIcon: ({ color, size, focused }) => (
-            <Icon
-              name={focused ? "bag-check" : "bag-check-outline"}
-              size={28}
-              color={focused ? "#f39200" : "#c0c0c0"}
-            />
-          ),
-          tabBarActiveTintColor: "#f39200",
-          tabBarInactiveTintColor: "#c0c0c0",
-        }}
-      />
-      <Tab.Screen
-        name="Scan QR"
-        component={QrScreenPage}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <Icon

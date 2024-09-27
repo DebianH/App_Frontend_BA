@@ -4,28 +4,18 @@ import { View, StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ChartScreenPage: React.FC = () => (
-  <SafeAreaView style={styles.SafeAreaView}>
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.text}>Aquí va el contenido de estadistica</Text>
-      </View>
-    </View>
-  </SafeAreaView>
+
+  <View style={styles.container}>
+    <Text style={styles.text}>Aquí va el contenido de estadistica</Text>
+  </View>
 );
 
 const styles = StyleSheet.create({
-  SafeAreaView: {
-    flex: 1,
-  },
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    paddingHorizontal: 20, // Espaciado horizontal
+    justifyContent: 'center',
   },
   text: {
     fontSize: 20,

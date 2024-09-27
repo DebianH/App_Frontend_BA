@@ -1,28 +1,27 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView, Text, Button } from 'react-native';
-import MainSection from '../organism/MainSectionHomeScreen';
-import NavigationBar from '../molecules/NavigationBar';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import NewsButton from '../atoms/newsHomeButton';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../routesNavigation/routesScreens';
+import React from "react";
+import { View, StyleSheet, ScrollView, Text, Button } from "react-native";
+import MainSection from "../organism/MainSectionHomeScreen";
+import NavigationBar from "../molecules/NavigationBar";
+import { SafeAreaView } from "react-native-safe-area-context";
+import NewsButton from "../atoms/newsHomeButton";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../routesNavigation/routesScreens";
 type NavigationProps = StackNavigationProp<RootStackParamList>;
-
 
 const HomeScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProps>();
   return (
-    <SafeAreaView style={styles.SafeAreaView}>
+    <View style={styles.SafeAreaView}>
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
-          <View style={styles.mainSection}>
-            <Text style={styles.subtitle}>Hola, Jose Luis!</Text>
+          <View>
+            <Text style={styles.subtitle}>Hola!, Jose Luis!</Text>
             <MainSection />
           </View>
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
     color: "#000",
     flex: 1,
     textAlign: "center",
-    marginTop: 25,
+    marginTop: 10,
     marginBottom: 10,
     fontWeight: "bold",
   },
@@ -47,9 +46,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   // Aplica el desplazamiento solo al contenedor de MainSection
-  mainSection: {
-    transform: [{ translateY: -10 }], // Ajusta el valor según sea necesario
-  },
+  // mainSection: {
+  //   transform: [{ translateY: -10 }],  // Ajusta el valor según sea necesario
+  // },
 });
 
 export default HomeScreen;

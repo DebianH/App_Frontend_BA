@@ -6,11 +6,11 @@ import DonationScreenCards from "../organism/DonationCardsScreen";
 
 const DonationScreenPage: React.FC = () => {
   return (
-    <SafeAreaView style={styles.SafeAreaView}>
+    <View style={styles.SafeAreaView}>
       <View style={styles.container}>
         <DonationScreenCards />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
