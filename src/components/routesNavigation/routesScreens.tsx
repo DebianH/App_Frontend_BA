@@ -149,6 +149,19 @@ function DrawerGroup() {
           ),
         }}
       />
+      <Drawer.Screen
+        name="Login"
+        component={LoginScreenPage}
+        options={{
+          headerShown: true,
+          headerTitle: "Mi Perfil",
+          headerTitleAlign: "center",
+          drawerLabel: "Cerrar Sesion",
+          drawerIcon: ({ color, size }) => (
+            <Icon name="person-circle-outline" size={28} color={"black"} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }
@@ -170,8 +183,8 @@ function Routes() {
       }}
     >
       <Tab.Screen
-        name="Check"
-        component={ScannerCameraQR}
+        name="Scan QR"
+        component={QrScreenPage}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <Icon
@@ -233,5 +246,4 @@ function Routes() {
     </Tab.Navigator>
   );
 }
-export default Routes;
-// export default DrawerGroup;
+export default DrawerGroup;
