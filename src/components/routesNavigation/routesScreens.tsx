@@ -12,7 +12,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import DetailsScreen from '../Pages/NewBAPage';
 import QrScreenPage from '../Pages/QrScreenPage';
-import ProfileScreenPage from '../Pages/ProfileScreenPage';
+import ProfileHomeScreenPage from '../Pages/ProfileHomeScreenPage';
+import ProfileEditPage from '../Pages/ProfileEditPage';
 // import HomeScreenPage from '../Pages/HomeScreenPage';
 // export type RootStackParamList = {
 //   HomeScreenPage: undefined;
@@ -28,9 +29,26 @@ const HomeStack = createNativeStackNavigator();
 // const HomeStack = createStackNavigator();
 const DonationStack = createNativeStackNavigator();
 const ChartStack = createNativeStackNavigator();
-
+//EditProfileStack
+const EditProfileStack = createNativeStackNavigator();
 //Drawer
 const Drawer = createDrawerNavigator();
+
+function ProfileScreen() {
+  return (
+    <EditProfileStack.Navigator initialRouteName="HomeProfile">
+      <EditProfileStack.Screen
+        name="HomeProfile"
+        component={ProfileHomeScreenPage}
+        options={{ headerShown: true, }}
+      />
+      <EditProfileStack.Screen
+        name="EditProfile"
+        component={ProfileEditPage}
+        options={{ presentation: 'modal' }} />
+    </EditProfileStack.Navigator>
+  );
+}
 
 function HomeStackScreen() {
   return (
@@ -38,8 +56,7 @@ function HomeStackScreen() {
       <HomeStack.Screen
         name="Home"
         component={HomeScreenPage}
-        options={{ headerShown: false, }}
-      />
+        options={{ headerShown: false, }} />
       <HomeStack.Screen
         name="Noticias"
         component={DetailsScreen}
@@ -52,9 +69,9 @@ function DonationStackScreen() {
   return (
     <DonationStack.Navigator>
       <DonationStack.Screen
-        name="¿Qué vamos a donar hoy?"
+        name="Donaciones"
         component={DonationScreenPage}
-        options={{ headerShown: true, }}
+        options={{ headerShown: false, }}
       />
     </DonationStack.Navigator>
   );
@@ -85,8 +102,8 @@ function DrawerGroup() {
   return (
     <Drawer.Navigator initialRouteName='Routes' screenOptions={{ headerShown: false }}>
       <Drawer.Screen
-        name='Profile'
-        component={ProfileScreenPage}
+        name='ProfileNavigation'
+        component={ProfileNavigation}
         options={{
           headerShown: true,
           headerTitle: 'Mi Perfil',
@@ -197,6 +214,17 @@ function Routes() {
     </Tab.Navigator>
   );
 };
+
+function ProfileNavigation() {
+  return (
+    <Tab.Navigator >
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{
+        headerShown: false,
+        tabBarStyle: { display: 'none' },
+      }} />
+    </Tab.Navigator>
+  );
+}
 
 export default DrawerGroup;
 
