@@ -62,12 +62,48 @@ export default function QrScreenPage() {
 
 const styles = StyleSheet.create({
 
-    square: {
-        width: 280,
-        height: 280,
-        borderRadius: 10,
+  square: {
+    width: 280,
+    height: 280,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#000',
+},
+    buttonContainer: {
+        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 300,
+        height: 50,
+    },
+    buttonLeft: {
+        position: 'absolute',
+        left: 30,
+        backgroundColor: '#d3e6d1',
+        paddingVertical: 15,
+        paddingHorizontal: 30,
+        borderTopLeftRadius: 25,
+        borderBottomLeftRadius: 25,
+        borderColor: '#c0c0c0',
         borderWidth: 1,
-        borderColor: '#000',
+    },
+    buttonRight: {
+        position: 'absolute',
+        right: 30,
+        backgroundColor: '#77c528',
+        paddingVertical: 15,
+        paddingHorizontal: 30,
+        borderTopRightRadius: 25,
+        borderBottomRightRadius: 25,
+        borderTopLeftRadius: 25,
+        borderBottomLeftRadius: 25,
+        borderColor: '#828282',
+        borderWidth: 1,
+    },
+    buttonText: {
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
     buttonContainer: {
         marginTop: 20,

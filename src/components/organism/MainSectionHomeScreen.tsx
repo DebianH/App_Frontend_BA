@@ -106,10 +106,10 @@ export default function MainSection() {
 
   const { navigate } = useNavigation();
   const handlePressDetails = () => {
-    navigate('Noticias');
+    //navigate('Noticias');
   };
   const handleDonation = () => {
-    navigate('Donar');
+    //navigate('Donar');
   };
 
   return (
