@@ -1,23 +1,34 @@
 import React from 'react';
 import { useNavigation } from "@react-navigation/native";
 import { Button, FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function ProfileScreenPage() {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.cardProfileHead} >
-                <View style={{ width: 60, height: 60, backgroundColor: '#FFF', padding: 10, borderRadius: 100, borderWidth: 1, borderColor: '#d3e6d1' }}>
-                </View>
-                <Text style={{ fontSize: 24, color: '#000', textAlign: 'center' }}>Jose Luis</Text>
+                <Image
+                    source={require('../../assets/avatarMen.png')}
+                    style={{ width: 60, height: 60, borderRadius: 50, backgroundColor: '#FFF' }}
+                    resizeMode="contain"
+                />
+                <Text style={{ fontSize: 24, color: '#000', textAlign: 'center', fontWeight: '300', fontStyle: 'italic' }}>Jose Luis</Text>
             </View>
             <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
+                <Icon name="pencil-sharp" size={32} color="#000000" />
                 <Text >Editar Perfil</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
+                <Icon name="person-outline" size={32} color="#000000" />
                 <Text >Cuenta</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
+                <Icon name="ribbon-outline" size={32} color="#000000" />
+                <Text >Avatar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
+                <Icon name="exit-outline" size={32} color="#000000" />
                 <Text >Cerrar Sesión</Text>
             </TouchableOpacity>
             <View>

@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native"
+
 export const Stories = [
     {
         title: 'Afro vibes',
@@ -18,3 +20,6 @@ export const Stories = [
         btnTitle: 'Ver más',
     },
 ]
+
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window')
+export { SCREEN_WIDTH, SCREEN_HEIGHT }
