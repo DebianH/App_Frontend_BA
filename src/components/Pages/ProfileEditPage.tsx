@@ -7,7 +7,6 @@ function ProfielEditScreen() {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Edit Profile Screen</Text>
-
         </View>
     );
 }
