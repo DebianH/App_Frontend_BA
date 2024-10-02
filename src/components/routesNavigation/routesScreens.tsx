@@ -8,12 +8,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useRef } from 'react';
+// import { Image } from 'expo-image';
 
 import DetailsScreen from '../Pages/NewBAPage';
 import QrScreenPage from '../Pages/QrScreenPage';
 import ProfileHomeScreenPage from '../Pages/ProfileHomeScreenPage';
 import ProfileEditPage from '../Pages/ProfileEditPage';
+import ProfileAccountPage from '../Pages/ProfileAccountPage';
 
 export type RootStackParamList = {
   HomeStack: undefined;
@@ -47,6 +48,14 @@ function ProfileScreen() {
       />
       <EditProfileStack.Screen
         name="EditProfile"
+        component={ProfileEditPage}
+        options={{ presentation: 'modal' }} />
+      <EditProfileStack.Screen
+        name="AccountProfile"
+        component={ProfileAccountPage}
+        options={{ presentation: 'modal' }} />
+      <EditProfileStack.Screen
+        name="AvatarProfile"
         component={ProfileEditPage}
         options={{ presentation: 'modal' }} />
     </EditProfileStack.Navigator>
@@ -105,7 +114,11 @@ function DrawerGroup() {
   return (
     <Drawer.Navigator
       initialRouteName={'Routes'}
-      screenOptions={{ headerShown: false, }}
+      screenOptions={{
+        headerShown: false,
+        drawerActiveTintColor: '#f39200',
+        drawerInactiveTintColor: '#9e9e9e',
+      }}
       drawerContent={(props) => {
         return (
           <SafeAreaView style={{ flex: 1 }}>
@@ -117,7 +130,8 @@ function DrawerGroup() {
               alignItems: 'center',
               alignContent: 'center',
               gap: 10,
-              // backgroundColor: 'tomato',
+              borderBottomColor: '#c0c0c0',
+              borderBottomWidth: 1,
             }}>
               <Image
                 source={require('../../assets/avatarMen.png')}
@@ -138,18 +152,8 @@ function DrawerGroup() {
         )
       }}
     >
-      <Drawer.Screen
-        name='ProfileNavigation'
-        component={ProfileNavigation}
-        options={{
-          headerShown: true,
-          headerTitle: 'Mi Perfil',
-          headerTitleAlign: 'center',
-          drawerLabel: 'Mi Perfil',
-          drawerIcon: ({ color, size }) => (
-            <Icon name="person-outline" size={28} color={"black"} />
-          ),
-        }} />
+
+
       <Drawer.Screen name='Routes' component={Routes}
         options={{
           headerShown: true,
@@ -185,6 +189,19 @@ function DrawerGroup() {
         }} />
 
       <Drawer.Screen
+        name='ProfileNavigation'
+        component={ProfileNavigation}
+        options={{
+          headerShown: true,
+          headerTitle: 'Mi Perfil',
+          headerTitleAlign: 'center',
+          drawerLabel: 'Mi Perfil',
+          drawerIcon: ({ color, size }) => (
+            <Icon name="person-outline" size={28} color={"black"} />
+          ),
+        }} />
+
+      <Drawer.Screen
         name='Contributions'
         component={ProfileNavigation}
         options={{
@@ -209,6 +226,7 @@ function DrawerGroup() {
             <Icon name="help-circle-outline" size={28} color={"black"} />
           ),
         }} />
+
     </Drawer.Navigator>
   )
 }
@@ -223,7 +241,6 @@ function Routes() {
           height: 70,
           paddingBottom: 10,
           paddingTop: 10,
-          // elevation: 10,
           borderTopColor: '#c0c0c0',
           borderTopWidth: 1,
         },
@@ -274,7 +291,6 @@ function Routes() {
             name={focused ? 'bag-check' : 'bag-check-outline'}
             size={focused ? 30 : size}
             color={focused ? '#f39200' : '#c0c0c0'}
-
           />
         ),
         tabBarActiveTintColor: '#f39200',

@@ -10,7 +10,6 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Card from '../molecules/CardHomeScreen';
-import CardImage from '../molecules/CardImageHomeScreen';
 import { useNavigation } from '@react-navigation/native';
 import { Stories } from '../../StoriesHome';
 

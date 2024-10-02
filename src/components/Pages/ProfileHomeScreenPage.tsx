@@ -1,7 +1,29 @@
 import React from 'react';
 import { useNavigation } from "@react-navigation/native";
-import { Button, FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
+
+const handleLogout = () => {
+    Alert.alert(
+        "Confirmar",
+        "¿Estás seguro de que quieres cerrar sesión?",
+        [
+            {
+                text: "Cancelar",
+                style: "cancel"
+            },
+            {
+                text: "Cerrar",
+                onPress: () => {
+                    // Aquí  la lógica para cerrar sesión, 
+                    // navigation.replace('LoginScreen');
+                    console.log("Sesión cerrada");
+                }
+            }
+        ],
+        { cancelable: true }
+    );
+};
 
 export default function ProfileScreenPage() {
     const navigation = useNavigation();
@@ -10,29 +32,33 @@ export default function ProfileScreenPage() {
             <View style={styles.cardProfileHead} >
                 <Image
                     source={require('../../assets/avatarMen.png')}
-                    style={{ width: 60, height: 60, borderRadius: 50, backgroundColor: '#FFF' }}
+                    style={{ width: 70, height: 70, borderRadius: 50, backgroundColor: 'transparent', borderColor: '#9e9e9e', borderWidth: 1 }}
                     resizeMode="contain"
                 />
-                <Text style={{ fontSize: 24, color: '#000', textAlign: 'center', fontWeight: '300', fontStyle: 'italic' }}>Jose Luis</Text>
+                <Text style={{ fontSize: 18, color: '#000', textAlign: 'center', fontWeight: '400' }}>Jose Luis Guevara</Text>
             </View>
             <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
                 <Icon name="pencil-sharp" size={32} color="#000000" />
                 <Text >Editar Perfil</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
+            <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('AccountProfile')}>
                 <Icon name="person-outline" size={32} color="#000000" />
                 <Text >Cuenta</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
-                <Icon name="ribbon-outline" size={32} color="#000000" />
+                <Icon name="shirt-outline" size={32} color="#000000" />
                 <Text >Avatar</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
+            <TouchableOpacity style={styles.cardProfile} onPress={handleLogout}>
                 <Icon name="exit-outline" size={32} color="#000000" />
-                <Text >Cerrar Sesión</Text>
+                <Text>Cerrar Sesión</Text>
             </TouchableOpacity>
-            <View>
-                <Text style={{ fontSize: 14, color: '#000', textAlign: 'center', marginVertical: 100 }}>Hecho por{'\n'} Epn - GH DevCompany</Text>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 200 }}>
+                <View style={{ flexDirection: 'row', gap: 10, justifyContent: 'center', alignItems: 'center', paddingVertical: 0 }}>
+                    <Image source={require('../../assets/logoGh.png')} style={{ width: 60, height: 60, }} resizeMode="contain" />
+                    <Image source={require('../../assets/LOGO_EPN.png')} style={{ width: 80, height: 80, }} resizeMode="contain" />
+                </View>
+                {/* <Text style={{ fontSize: 14, color: '#000', textAlign: 'center' }}>Hecho con ❤️</Text> */}
             </View>
         </SafeAreaView>
     )
@@ -71,15 +97,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 20,
         marginHorizontal: 10,
-        marginVertical: 2,
+        marginBottom: 10,
         height: 80,
-        backgroundColor: '#D8D8D8',
+        // backgroundColor: '#D8D8D8',
         padding: 10,
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#c0c0c0',
-        // alignContent: 'center',
-        // justifyContent: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
     },
 });
