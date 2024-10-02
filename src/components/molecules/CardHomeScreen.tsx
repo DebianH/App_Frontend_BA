@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, Text, ImageSourcePropType, TouchableOpacity, Image } from 'react-native';
-import Icon from '../atoms/iconHomeScreen';
 
 interface CardProps {
   iconSource: ImageSourcePropType;
@@ -39,8 +38,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: '#000',
-    marginBottom: 20,
+    marginBottom: 10,
     textAlign: "center"
+  },
+  image: {
+    width: '100%',
+    height: '70%',
+    resizeMode: 'contain',
   },
 });
 
