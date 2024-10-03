@@ -3,13 +3,10 @@ import {
     View,
     Image,
     StyleSheet,
-    ScrollView,
     Text,
-    Button,
-    TouchableOpacity,
+    Pressable,
     Linking,
     Alert,
-    Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useCameraPermissions, CameraView, CameraType } from "expo-camera";
@@ -49,12 +46,12 @@ export default function QrScreenPage() {
                 }
             </View>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.buttonLeft} onPress={() => setIsVisible(false)}>
+                <Pressable style={styles.buttonLeft} onPress={() => setIsVisible(false)}>
                     <Text style={styles.buttonText}>Cancelar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonRight} onPress={openScanner}>
+                </Pressable>
+                <Pressable style={styles.buttonRight} onPress={openScanner}>
                     <Text style={styles.buttonText}>Leer QR</Text>
-                </TouchableOpacity>
+                </Pressable>
             </View>
         </SafeAreaView>
     );

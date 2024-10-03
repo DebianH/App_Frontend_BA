@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
-import axios from 'axios';
+// import axios from 'axios';
 
 interface Article {
   title: string;
@@ -9,56 +9,56 @@ interface Article {
 }
 
 const DetailsScreen = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  // const [articles, setArticles] = useState<Article[]>([]);
+  // const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await axios.get(
-          'https://newsapi.org/v2/top-headlines',
-          {
-            params: {
-              country: 'US', 
-              apiKey: '0b8856e329bd4c5b8a93f99094102425', 
-            },
-          }
-        );
-        setArticles(response.data.articles);
-      } catch (error) {
-        console.error("Error al obtener las noticias: ", error);
-        setError("No se pudo cargar las noticias.");
-      }
-    };
+  // useEffect(() => {
+  //   const fetchNews = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         'https://newsapi.org/v2/top-headlines',
+  //         {
+  //           params: {
+  //             country: 'US', 
+  //             apiKey: '0b8856e329bd4c5b8a93f99094102425', 
+  //           },
+  //         }
+  //       );
+  //       setArticles(response.data.articles);
+  //     } catch (error) {
+  //       console.error("Error al obtener las noticias: ", error);
+  //       setError("No se pudo cargar las noticias.");
+  //     }
+  //   };
 
-    fetchNews();
-  }, []);
+  //   fetchNews();
+  // }, []);
 
-  if (error || articles.length === 0) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.message}>Aquí va el texto</Text>
-      </View>
-    );
-  }
+  // if (error || articles.length === 0) {
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={styles.message}>Aquí va el texto</Text>
+  //     </View>
+  //   );
+  // }
 
-  const renderNewsItem = ({ item }: { item: Article }) => (
-    <View style={styles.newsItem}>
-      {item.urlToImage && (
-        <Image source={{ uri: item.urlToImage }} style={styles.newsImage} />
-      )}
-      <Text style={styles.newsTitle}>{item.title}</Text>
-      <Text style={styles.newsDescription}>{item.description}</Text>
-    </View>
-  );
+  // const renderNewsItem = ({ item }: { item: Article }) => (
+  //   <View style={styles.newsItem}>
+  //     {item.urlToImage && (
+  //       <Image source={{ uri: item.urlToImage }} style={styles.newsImage} />
+  //     )}
+  //     <Text style={styles.newsTitle}>{item.title}</Text>
+  //     <Text style={styles.newsDescription}>{item.description}</Text>
+  //   </View>
+  // );
 
   return (
     <View style={styles.container}>
-      <FlatList
+      {/* <FlatList
         data={articles}
         renderItem={renderNewsItem}
         keyExtractor={(item, index) => index.toString()}
-      />
+      /> */}
     </View>
   );
 };

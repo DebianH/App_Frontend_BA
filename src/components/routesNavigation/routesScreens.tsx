@@ -1,6 +1,6 @@
 // rutasDeScreens.tsx
 import React from 'react';
-import { View, Image, Animated, Dimensions, SafeAreaView, Text, StatusBar } from 'react-native';
+import { View, Image, Animated, Dimensions, SafeAreaView, Text } from 'react-native';
 import HomeScreenPage from '../Pages/HomeScreenPage';
 import DonationScreenPage from '../Pages/DonationScreenPage';
 import ChartScreenPage from '../Pages/ChartUserScreenPage';
@@ -8,13 +8,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import { Image } from 'expo-image';
 
 import DetailsScreen from '../Pages/NewBAPage';
 import QrScreenPage from '../Pages/QrScreenPage';
 import ProfileHomeScreenPage from '../Pages/ProfileHomeScreenPage';
 import ProfileEditPage from '../Pages/ProfileEditPage';
 import ProfileAccountPage from '../Pages/ProfileAccountPage';
+import BtnPaymenPage from '../Pages/BtnPaymenPage';
+import HelpPage from '../Pages/HelpPage';
+import PartnersPage from '../Pages/PartnersPage';
 
 export type RootStackParamList = {
   HomeStack: undefined;
@@ -26,17 +28,26 @@ export type RootStackParamList = {
   Routes: undefined;
 };
 
-
 const Tab = createBottomTabNavigator();
-const HomeStack = createNativeStackNavigator();
-// const HomeStack = createStackNavigator();
-const DonationStack = createNativeStackNavigator();
-const ChartStack = createNativeStackNavigator();
-//EditProfileStack
-const EditProfileStack = createNativeStackNavigator();
-//Drawer
 const Drawer = createDrawerNavigator();
 
+const HomeStack = createNativeStackNavigator();
+const ChartStack = createNativeStackNavigator();
+const DonationStack = createNativeStackNavigator();
+const EditProfileStack = createNativeStackNavigator();
+const BtnPaymenStack = createNativeStackNavigator();
+
+function BtnPaymenScreen() {
+  return (
+    <BtnPaymenStack.Navigator>
+      <BtnPaymenStack.Screen
+        name="BtnPaymenPage"
+        component={BtnPaymenPage}
+        options={{ headerShown: false, }}
+      />
+    </BtnPaymenStack.Navigator>
+  );
+}
 
 function ProfileScreen() {
   return (
@@ -62,54 +73,6 @@ function ProfileScreen() {
   );
 }
 
-function HomeStackScreen() {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="Home"
-        component={HomeScreenPage}
-        options={{ headerShown: false, }} />
-      <HomeStack.Screen
-        name="Noticias"
-        component={DetailsScreen}
-        options={{ presentation: 'modal' }} />
-    </HomeStack.Navigator>
-  );
-}
-
-function DonationStackScreen() {
-  return (
-    <DonationStack.Navigator>
-      <DonationStack.Screen
-        name="Donaciones"
-        component={DonationScreenPage}
-        options={{ headerShown: false, }}
-      />
-    </DonationStack.Navigator>
-  );
-}
-function ChartStackScreen() {
-  return (
-    <ChartStack.Navigator>
-      <ChartStack.Screen
-        name="Estadisticas"
-        component={ChartScreenPage}
-        options={{ headerShown: false, }}
-      />
-    </ChartStack.Navigator>
-  );
-}
-function QrStackScreen() {
-  return (
-    <ChartStack.Navigator>
-      <ChartStack.Screen
-        name="Generar QR"
-        component={QrScreenPage}
-        options={{ headerShown: false, }}
-      />
-    </ChartStack.Navigator>
-  );
-}
 function DrawerGroup() {
   return (
     <Drawer.Navigator
@@ -152,7 +115,6 @@ function DrawerGroup() {
         )
       }}
     >
-
 
       <Drawer.Screen name='Routes' component={Routes}
         options={{
@@ -203,7 +165,7 @@ function DrawerGroup() {
 
       <Drawer.Screen
         name='Contributions'
-        component={ProfileNavigation}
+        component={BtnPaymenNavigation}
         options={{
           headerShown: true,
           headerTitle: 'Contribuciones',
@@ -213,20 +175,31 @@ function DrawerGroup() {
             <Icon name="heart-outline" size={28} color={"black"} />
           ),
         }} />
+      <Drawer.Screen
+        name='Partners'
+        component={PartnersPage}
+        options={{
+          headerShown: true,
+          headerTitle: 'Colegas',
+          headerTitleAlign: 'center',
+          drawerLabel: 'Colegas',
+          drawerIcon: ({ color, size }) => (
+            <Icon name="happy-outline" size={28} color={"black"} />
+          ),
+        }} />
 
       <Drawer.Screen
         name='Help'
-        component={ProfileNavigation}
+        component={HelpPage}
         options={{
           headerShown: true,
-          headerTitle: 'Ayuda',
+          headerTitle: 'Soporte',
           headerTitleAlign: 'center',
           drawerLabel: 'Ayuda',
           drawerIcon: ({ color, size }) => (
             <Icon name="help-circle-outline" size={28} color={"black"} />
           ),
         }} />
-
     </Drawer.Navigator>
   )
 }
@@ -300,10 +273,69 @@ function Routes() {
   );
 };
 
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="Home"
+        component={HomeScreenPage}
+        options={{ headerShown: false, }} />
+      <HomeStack.Screen
+        name="Noticias"
+        component={DetailsScreen}
+        options={{ presentation: 'modal' }} />
+    </HomeStack.Navigator>
+  );
+}
+function DonationStackScreen() {
+  return (
+    <DonationStack.Navigator>
+      <DonationStack.Screen
+        name="Donaciones"
+        component={DonationScreenPage}
+        options={{ headerShown: false, }}
+      />
+    </DonationStack.Navigator>
+  );
+}
+function ChartStackScreen() {
+  return (
+    <ChartStack.Navigator>
+      <ChartStack.Screen
+        name="Estadisticas"
+        component={ChartScreenPage}
+        options={{ headerShown: false, }}
+      />
+    </ChartStack.Navigator>
+  );
+}
+function QrStackScreen() {
+  return (
+    <ChartStack.Navigator>
+      <ChartStack.Screen
+        name="Generar QR"
+        component={QrScreenPage}
+        options={{ headerShown: false, }}
+      />
+    </ChartStack.Navigator>
+  );
+}
+
+
 function ProfileNavigation() {
   return (
     <Tab.Navigator >
       <Tab.Screen name="Profile" component={ProfileScreen} options={{
+        headerShown: false,
+        tabBarStyle: { display: 'none' },
+      }} />
+    </Tab.Navigator>
+  );
+}
+function BtnPaymenNavigation() {
+  return (
+    <Tab.Navigator >
+      <Tab.Screen name="BtnPayment" component={BtnPaymenScreen} options={{
         headerShown: false,
         tabBarStyle: { display: 'none' },
       }} />

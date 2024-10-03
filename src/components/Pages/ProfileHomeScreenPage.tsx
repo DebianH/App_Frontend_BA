@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation } from "@react-navigation/native";
-import { Alert, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Pressable } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const handleLogout = () => {
@@ -37,26 +37,26 @@ export default function ProfileScreenPage() {
                 />
                 <Text style={{ fontSize: 18, color: '#000', textAlign: 'center', fontWeight: '400' }}>Jose Luis Guevara</Text>
             </View>
-            <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
+            <Pressable style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
                 <Icon name="pencil-sharp" size={32} color="#000000" />
                 <Text >Editar Perfil</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('AccountProfile')}>
+            </Pressable>
+            <Pressable style={styles.cardProfile} onPress={() => navigation.navigate('AccountProfile')}>
                 <Icon name="person-outline" size={32} color="#000000" />
                 <Text >Cuenta</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
+            </Pressable>
+            <Pressable style={styles.cardProfile} onPress={() => navigation.navigate('EditProfile')}>
                 <Icon name="shirt-outline" size={32} color="#000000" />
                 <Text >Avatar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.cardProfile} onPress={handleLogout}>
+            </Pressable>
+            <Pressable style={styles.cardProfile} onPress={handleLogout}>
                 <Icon name="exit-outline" size={32} color="#000000" />
                 <Text>Cerrar Sesión</Text>
-            </TouchableOpacity>
+            </Pressable>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 200 }}>
                 <View style={{ flexDirection: 'row', gap: 10, justifyContent: 'center', alignItems: 'center', paddingVertical: 0 }}>
-                    <Image source={require('../../assets/logoGh.png')} style={{ width: 60, height: 60, }} resizeMode="contain" />
-                    <Image source={require('../../assets/LOGO_EPN.png')} style={{ width: 80, height: 80, }} resizeMode="contain" />
+                    <Image source={require('../../assets/logoGh.png')} style={{ width: 65, height: 65, }} resizeMode="contain" />
+                    <Image source={require('../../assets/logoEpn.png')} style={{ width: 60, height: 60, }} resizeMode="contain" />
                 </View>
                 {/* <Text style={{ fontSize: 14, color: '#000', textAlign: 'center' }}>Hecho con ❤️</Text> */}
             </View>
