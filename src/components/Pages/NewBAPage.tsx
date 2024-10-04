@@ -1,64 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
-// import axios from 'axios';
-
+import { View, StyleSheet, FlatList, Text, Image } from 'react-native';
+import { getArticles } from '../../lib/fetchNews';
 interface Article {
   title: string;
-  description: string;
-  urlToImage: string;
+  content: string;
+  image: string; 
 }
 
-const DetailsScreen = () => {
-  // const [articles, setArticles] = useState<Article[]>([]);
-  // const [error, setError] = useState<string | null>(null);
+const NewsScreen = () => {
+  const [articles, setArticles] = useState<Article[]>([]);
 
-  // useEffect(() => {
-  //   const fetchNews = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         'https://newsapi.org/v2/top-headlines',
-  //         {
-  //           params: {
-  //             country: 'US', 
-  //             apiKey: '0b8856e329bd4c5b8a93f99094102425', 
-  //           },
-  //         }
-  //       );
-  //       setArticles(response.data.articles);
-  //     } catch (error) {
-  //       console.error("Error al obtener las noticias: ", error);
-  //       setError("No se pudo cargar las noticias.");
-  //     }
-  //   };
-
-  //   fetchNews();
-  // }, []);
-
-  // if (error || articles.length === 0) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text style={styles.message}>Aquí va el texto</Text>
-  //     </View>
-  //   );
-  // }
-
-  // const renderNewsItem = ({ item }: { item: Article }) => (
-  //   <View style={styles.newsItem}>
-  //     {item.urlToImage && (
-  //       <Image source={{ uri: item.urlToImage }} style={styles.newsImage} />
-  //     )}
-  //     <Text style={styles.newsTitle}>{item.title}</Text>
-  //     <Text style={styles.newsDescription}>{item.description}</Text>
-  //   </View>
-  // );
+  useEffect(() => {
+    getArticles().then((articles) => {
+      setArticles(articles);
+      })
+  }, []);
 
   return (
     <View style={styles.container}>
-      {/* <FlatList
+      <FlatList
         data={articles}
-        renderItem={renderNewsItem}
         keyExtractor={(item, index) => index.toString()}
-      /> */}
+        renderItem={({ item }) => (
+          <View style={styles.newsItem}>
+            {item.image && (
+              <Image source={{ uri: item.image }} style={styles.newsImage} />
+            )}
+            <Text style={styles.newsTitle}>{item.title}</Text>
+            <Text style={styles.newsContent}>{item.content}</Text>
+          </View>
+        )}
+      />
     </View>
   );
 };
@@ -66,7 +38,8 @@ const DetailsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    paddingTop: 20,
+    paddingHorizontal: 10,
   },
   newsItem: {
     marginBottom: 20,
@@ -88,15 +61,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
   },
-  newsDescription: {
+  newsContent: {
     fontSize: 14,
     marginTop: 5,
     color: '#666',
   },
-  message: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
 });
 
-export default DetailsScreen;
+export default NewsScreen;
