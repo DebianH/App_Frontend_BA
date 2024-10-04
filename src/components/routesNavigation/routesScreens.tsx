@@ -109,7 +109,7 @@ function DrawerGroup() {
             </View>
             <DrawerItemList {...props} />
             <View >
-              <Text style={{ fontSize: 14, color: '#c0c0c0', textAlign: 'center', marginTop: 300 }}>Rol: Organización</Text>
+              <Text style={{ fontSize: 14, color: '#c0c0c0', textAlign: 'center', marginTop: 250 }}>Rol: Organización</Text>
             </View>
           </SafeAreaView>
         )
