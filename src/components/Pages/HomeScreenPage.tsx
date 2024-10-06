@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { View, StyleSheet, ScrollView, Text, Button } from 'react-native';
 import MainSection from '../organism/MainSectionHomeScreen';
@@ -50,4 +51,4 @@ const styles = StyleSheet.create({
   // },
 });
 
-export default HomeScreen; 
+export default HomeScreen; */

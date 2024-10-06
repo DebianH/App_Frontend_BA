@@ -1,7 +1,7 @@
 // rutasDeScreens.tsx
 import React from 'react';
 import { View, Image, Animated, Dimensions, SafeAreaView, Text } from 'react-native';
-import HomeScreenPage from '../Pages/HomeScreenPage';
+//import HomeScreenPage from '../Pages/HomeScreenPage';
 import DonationScreenPage from '../Pages/DonationScreenPage';
 import ChartScreenPage from '../Pages/ChartUserScreenPage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import DetailsScreen from '../Pages/NewBAPage';
 import QrScreenPage from '../Pages/QrScreenPage';
-import ProfileHomeScreenPage from '../Pages/ProfileHomeScreenPage';
+//import ProfileHomeScreenPage from '../Pages/ProfileHomeScreenPage';
 import ProfileEditPage from '../Pages/ProfileEditPage';
 import ProfileAccountPage from '../Pages/ProfileAccountPage';
 import BtnPaymenPage from '../Pages/BtnPaymenPage';
@@ -52,11 +52,8 @@ function BtnPaymenScreen() {
 function ProfileScreen() {
   return (
     <EditProfileStack.Navigator initialRouteName="HomeProfile">
-      <EditProfileStack.Screen
-        name="HomeProfile"
-        component={ProfileHomeScreenPage}
-        options={{ headerShown: false }}
-      />
+      
+
       <EditProfileStack.Screen
         name="EditProfile"
         component={ProfileEditPage}
@@ -276,10 +273,7 @@ function Routes() {
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="Home"
-        component={HomeScreenPage}
-        options={{ headerShown: false, }} />
+      
       <HomeStack.Screen
         name="Noticias"
         component={DetailsScreen}

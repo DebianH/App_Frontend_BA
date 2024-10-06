@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { useNavigation } from "@react-navigation/native";
 import { Alert, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Pressable } from "react-native";
@@ -58,7 +59,7 @@ export default function ProfileScreenPage() {
                     <Image source={require('../../assets/logoGh.png')} style={{ width: 65, height: 65, }} resizeMode="contain" />
                     <Image source={require('../../assets/logoEpn.png')} style={{ width: 60, height: 60, }} resizeMode="contain" />
                 </View>
-                {/* <Text style={{ fontSize: 14, color: '#000', textAlign: 'center' }}>Hecho con ❤️</Text> */}
+                {/* <Text style={{ fontSize: 14, color: '#000', textAlign: 'center' }}>Hecho con ❤️</Text> *}
             </View>
         </SafeAreaView>
     )
@@ -107,4 +108,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-});
+});*/

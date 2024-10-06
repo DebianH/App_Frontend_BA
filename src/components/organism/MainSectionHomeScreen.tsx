@@ -1,3 +1,4 @@
+/*
 import * as React from 'react';
 import {
   Image,
@@ -275,6 +276,6 @@ const styles = StyleSheet.create({
     height: OVERFLOW_HEIGHT,
     overflow: 'hidden',
   },
-});
+}); */
 
 
