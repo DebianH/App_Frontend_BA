@@ -1,6 +1,24 @@
-import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
-
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text, Image, Pressable } from 'react-native';
+import { getContentCategories } from '../../lib/fetchProducts';
+import { useNavigation } from '@react-navigation/native';
+import { ProductItem } from '../organism/ProductItem';
+type Product = {
+    id: number;
+    title: string;
+    price: number;
+    description: string;
+    images: string[];
+    creationAt: string;  // Fecha en formato ISO
+    updatedAt: string;   // Fecha en formato ISO
+    category: {
+        id: number;
+        name: string;
+        image: string;
+        creationAt: string;  // Fecha en formato ISO
+        updatedAt: string;   // Fecha en formato ISO
+    };
+};
 type Category = {
     id: number,
     name: string,
@@ -10,11 +28,22 @@ type Category = {
 };
 
 export const CategoryItem = ({ category }: { category: Category }) => {
+    const [products, setProducts] = useState<Product[]>([]);
+    const { navigate } = useNavigation();
+
+    async function handlePress(id: number) {
+
+        const fetchedProducts = await getContentCategories(id);
+        setProducts(fetchedProducts);
+        navigate('ProductItem');
+
+        console.log("xxx", products);
+    }
     return (
-        <View style={styles.card}>
+        <Pressable style={styles.card} onPress={() => handlePress(category.id)}>
             <Image source={{ uri: category.image }} style={styles.image} />
             <Text style={styles.name}>{category.name}</Text>
-        </View>
+        </Pressable>
     );
 };
 
