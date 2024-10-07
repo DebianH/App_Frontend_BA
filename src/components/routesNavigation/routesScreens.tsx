@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Image, Animated, Dimensions, SafeAreaView, Text } from 'react-native';
 //import HomeScreenPage from '../Pages/HomeScreenPage';
-import DonationScreenPage from '../Pages/DonationScreenPage';
+//import DonationScreenPage from '../Pages/DonationScreenPage';
 import ChartScreenPage from '../Pages/ChartUserScreenPage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
@@ -17,7 +17,7 @@ import ProfileAccountPage from '../Pages/ProfileAccountPage';
 import BtnPaymenPage from '../Pages/BtnPaymenPage';
 import HelpPage from '../Pages/HelpPage';
 import PartnersPage from '../Pages/PartnersPage';
-import ProductItem from '../organism/ProductItem';
+//import ProductItem from '../organism/ProductItem';
 
 export type RootStackParamList = {
   HomeStack: undefined;
@@ -255,17 +255,7 @@ function Routes() {
         tabBarActiveTintColor: '#f39200',
         tabBarInactiveTintColor: '#c0c0c0',
       }} />
-      <Tab.Screen name="Donar" component={DonationStackScreen} options={{
-        tabBarIcon: ({ color, size, focused }) => (
-          <Icon
-            name={focused ? 'bag-check' : 'bag-check-outline'}
-            size={focused ? 30 : size}
-            color={focused ? '#f39200' : '#c0c0c0'}
-          />
-        ),
-        tabBarActiveTintColor: '#f39200',
-        tabBarInactiveTintColor: '#c0c0c0',
-      }} />
+
     </Tab.Navigator>
   );
 };
@@ -281,22 +271,7 @@ function HomeStackScreen() {
     </HomeStack.Navigator>
   );
 }
-function DonationStackScreen() {
-  return (
-    <DonationStack.Navigator>
-      <DonationStack.Screen
-        name="Donaciones"
-        component={DonationScreenPage}
-        options={{ headerShown: false, }}
-      />
-      <DonationStack.Screen
-        name="ProductItem"
-        component={ProductItem}
-        options={{ headerShown: true, headerTitle: 'Productos', }}
-      />
-    </DonationStack.Navigator>
-  );
-}
+
 function ChartStackScreen() {
   return (
     <ChartStack.Navigator>

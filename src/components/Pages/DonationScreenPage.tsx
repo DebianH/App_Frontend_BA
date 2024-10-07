@@ -1,3 +1,4 @@
+/*
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, FlatList, Text, Image, useWindowDimensions } from 'react-native';
 import { getCategories } from '../../lib/fetchProducts';
@@ -48,5 +49,4 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingTop: 10,
   },
-});
-
+});*/

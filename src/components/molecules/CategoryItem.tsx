@@ -1,3 +1,4 @@
+/*
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Image, Pressable } from 'react-native';
 import { getContentCategories } from '../../lib/fetchProducts';
@@ -71,4 +72,4 @@ const styles = StyleSheet.create({
         elevation: 5,
         marginBottom: 10,
     },
-});
+}); */
