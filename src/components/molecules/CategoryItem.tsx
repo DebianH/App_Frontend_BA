@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Image, Pressable } from 'react-native';
 import { getContentCategories } from '../../lib/fetchProducts';
 import { useNavigation } from '@react-navigation/native';
-import { ProductItem } from '../organism/ProductItem';
+// import { ProductItem } from '../organism/ProductItem';
 type Product = {
     id: number;
     title: string;
     price: number;
     description: string;
     images: string[];
-    creationAt: string;  // Fecha en formato ISO
-    updatedAt: string;   // Fecha en formato ISO
+    creationAt: string;
+    updatedAt: string;
     category: {
         id: number;
         name: string;
         image: string;
-        creationAt: string;  // Fecha en formato ISO
-        updatedAt: string;   // Fecha en formato ISO
+        creationAt: string;
+        updatedAt: string;
     };
 };
 type Category = {
@@ -28,17 +28,15 @@ type Category = {
 };
 
 export const CategoryItem = ({ category }: { category: Category }) => {
-    const [products, setProducts] = useState<Product[]>([]);
+    // const [products, setProducts] = useState<Product[]>([]);
     const { navigate } = useNavigation();
 
     async function handlePress(id: number) {
-
         const fetchedProducts = await getContentCategories(id);
-        setProducts(fetchedProducts);
-        navigate('ProductItem');
-
-        console.log("xxx", products);
+        // setProducts(fetchedProducts);
+        navigate('ProductItem', { products: fetchedProducts });
     }
+
     return (
         <Pressable style={styles.card} onPress={() => handlePress(category.id)}>
             <Image source={{ uri: category.image }} style={styles.image} />
