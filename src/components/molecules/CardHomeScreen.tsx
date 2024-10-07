@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, ImageSourcePropType, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, Text, ImageSourcePropType, TouchableOpacity, Image, Pressable } from 'react-native';
 
 interface CardProps {
   iconSource: ImageSourcePropType;
@@ -11,10 +11,10 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ iconSource, title, width = 160, height = 200, onPress }) => {
   return (
-    <TouchableOpacity style={[styles.card, { width, height }]} onPress={onPress}>
+    <Pressable style={[styles.card, { width, height }]} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
       <Image source={iconSource} />
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

@@ -17,6 +17,7 @@ import ProfileAccountPage from '../Pages/ProfileAccountPage';
 import BtnPaymenPage from '../Pages/BtnPaymenPage';
 import HelpPage from '../Pages/HelpPage';
 import PartnersPage from '../Pages/PartnersPage';
+import ProductItem from '../organism/ProductItem';
 
 export type RootStackParamList = {
   HomeStack: undefined;
@@ -83,7 +84,6 @@ function DrawerGroup() {
         return (
           <SafeAreaView style={{ flex: 1 }}>
             <View style={{
-              // flex: 1,
               height: 250,
               width: '100%',
               justifyContent: 'center',
@@ -106,7 +106,7 @@ function DrawerGroup() {
             </View>
             <DrawerItemList {...props} />
             <View >
-              <Text style={{ fontSize: 14, color: '#c0c0c0', textAlign: 'center', marginTop: 300 }}>Rol: Organización</Text>
+              <Text style={{ fontSize: 14, color: '#c0c0c0', textAlign: 'center', marginTop: 250 }}>Rol: Organización</Text>
             </View>
           </SafeAreaView>
         )
@@ -288,6 +288,11 @@ function DonationStackScreen() {
         name="Donaciones"
         component={DonationScreenPage}
         options={{ headerShown: false, }}
+      />
+      <DonationStack.Screen
+        name="ProductItem"
+        component={ProductItem}
+        options={{ headerShown: true, headerTitle: 'Productos', }}
       />
     </DonationStack.Navigator>
   );
