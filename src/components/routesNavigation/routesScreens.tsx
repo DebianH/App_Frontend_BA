@@ -139,7 +139,8 @@ function DrawerGroup() {
           headerTitleAlign: 'center',
           headerRight: () => (
             <Icon
-              name='id-card-outline'
+              // name='id-card-outline'
+              name='cart-outline'
               size={28}
               color='black'
               style={{ marginRight: 10 }}
@@ -177,9 +178,9 @@ function DrawerGroup() {
         component={PartnersPage}
         options={{
           headerShown: true,
-          headerTitle: 'Colegas',
+          headerTitle: 'Aliados',
           headerTitleAlign: 'center',
-          drawerLabel: 'Colegas',
+          drawerLabel: 'Aliados',
           drawerIcon: ({ color, size }) => (
             <Icon name="happy-outline" size={28} color={"black"} />
           ),
