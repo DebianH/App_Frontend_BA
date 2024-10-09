@@ -18,6 +18,8 @@ import BtnPaymenPage from '../Pages/BtnPaymenPage';
 import HelpPage from '../Pages/HelpPage';
 import PartnersPage from '../Pages/PartnersPage';
 import ProductItem from '../organism/ProductItem';
+import QrGeneratePage from '../Pages/QrGeneratePage';
+import ReceiveProductsPage from '../Pages/ReceiveProductsPage';
 
 export type RootStackParamList = {
   HomeStack: undefined;
@@ -142,8 +144,8 @@ function DrawerGroup() {
           headerTitleAlign: 'center',
           headerRight: () => (
             <Icon
-              // name='id-card-outline'
-              name='cart-outline'
+              name='trail-sign-outline'
+              // name='cart-outline'
               size={28}
               color='black'
               style={{ marginRight: 10 }}
@@ -205,7 +207,7 @@ function DrawerGroup() {
   )
 }
 function Routes() {
-
+  const rolState = false;
   return (
     <Tab.Navigator
       initialRouteName='Inicio'
@@ -222,21 +224,39 @@ function Routes() {
           fontSize: 14,
         },
       })}>
-      <Tab.Screen
-        name="Check"
-        component={QrStackScreen}
-        options={{
-          tabBarIcon: ({ color, size, focused }) => (
-            <Icon
-              name={focused ? 'qr-code' : 'qr-code-outline'}
-              size={focused ? 30 : size}
-              color={focused ? '#f39200' : '#c0c0c0'}
-            />
-          ),
-          tabBarActiveTintColor: '#f39200',
-          tabBarInactiveTintColor: '#c0c0c0',
-        }}
-      />
+      {
+        rolState ?
+          <Tab.Screen
+            name="Check"
+            component={QrStackScreen}
+            options={{
+              tabBarIcon: ({ color, size, focused }) => (
+                <Icon
+                  name={focused ? 'checkmark-done-circle' : 'checkmark-done-circle-outline'}
+                  size={focused ? 30 : size}
+                  color={focused ? '#f39200' : '#c0c0c0'}
+                />
+              ),
+              tabBarActiveTintColor: '#f39200',
+              tabBarInactiveTintColor: '#c0c0c0',
+            }}
+          /> :
+          <Tab.Screen
+            name="Mi QR"
+            component={QrGeneratePage}
+            options={{
+              tabBarIcon: ({ color, size, focused }) => (
+                <Icon
+                  name={focused ? 'qr-code' : 'qr-code-outline'}
+                  size={focused ? 30 : size}
+                  color={focused ? '#f39200' : '#c0c0c0'}
+                />
+              ),
+              tabBarActiveTintColor: '#f39200',
+              tabBarInactiveTintColor: '#c0c0c0',
+            }}
+          />
+      }
       <Tab.Screen name="Gráficas" component={ChartStackScreen} options={{
         tabBarIcon: ({ color, size, focused }) => (
           <Icon
@@ -259,17 +279,32 @@ function Routes() {
         tabBarActiveTintColor: '#f39200',
         tabBarInactiveTintColor: '#c0c0c0',
       }} />
-      <Tab.Screen name="Donar" component={DonationStackScreen} options={{
-        tabBarIcon: ({ color, size, focused }) => (
-          <Icon
-            name={focused ? 'bag-check' : 'bag-check-outline'}
-            size={focused ? 30 : size}
-            color={focused ? '#f39200' : '#c0c0c0'}
-          />
-        ),
-        tabBarActiveTintColor: '#f39200',
-        tabBarInactiveTintColor: '#c0c0c0',
-      }} />
+      {
+        rolState ?
+          <Tab.Screen name="Donar" component={DonationStackScreen} options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <Icon
+                name={focused ? 'bag-check' : 'bag-check-outline'}
+                size={focused ? 30 : size}
+                color={focused ? '#f39200' : '#c0c0c0'}
+              />
+            ),
+            tabBarActiveTintColor: '#f39200',
+            tabBarInactiveTintColor: '#c0c0c0',
+          }} /> :
+          <Tab.Screen name="Recibir" component={ReceiveProductsPage} options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <Icon
+                name={focused ? 'balloon-sharp' : 'balloon-outline'}
+                size={focused ? 30 : size}
+                color={focused ? '#f39200' : '#c0c0c0'}
+              />
+            ),
+            tabBarActiveTintColor: '#f39200',
+            tabBarInactiveTintColor: '#c0c0c0',
+          }} />
+      }
+
     </Tab.Navigator>
   );
 };

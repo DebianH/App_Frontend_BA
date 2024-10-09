@@ -4,7 +4,7 @@ import { getArticles } from '../../lib/fetchNews';
 interface Article {
   title: string;
   content: string;
-  image: string; 
+  image: string;
 }
 
 const NewsScreen = () => {
@@ -13,7 +13,7 @@ const NewsScreen = () => {
   useEffect(() => {
     getArticles().then((articles) => {
       setArticles(articles);
-      })
+    })
   }, []);
 
   return (
