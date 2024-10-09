@@ -12,9 +12,18 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Esta aplicación necesita acceso a la biblioteca de fotos para seleccionar archivos PDF.",
+        "NSDocumentDirectoryUsageDescription": "Esta aplicación necesita acceso a la carpeta de documentos para seleccionar archivos PDF.",
+        "NSFileProtectionComplete": "Esta aplicación protege los archivos mientras no se está utilizando."
+      }
     },
     "android": {
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"

@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, PanResponder, Animated, Dimensions } from 'react-native';
+import React, { useState } from 'react'; 
+import { View, Text, TextInput, Button, StyleSheet, FlatList, Dimensions, Animated } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
 // Configurar las vistas de forma dinámica para escalabilidad
 const views = [
   {
-    title: 'Vista 1: Preregistro',
+    title: 'Preregistro',
     fields: ['Nombre de la Organización', 'RUC', 'Teléfono', 'Email', 'Dirección'],
   },
   {
-    title: 'Vista 2: Información Adicional',
+    title: 'Preregistro: Información Adicional',
     fields: [
       'Propósito de la Organización',
       'Motivo de la Organización',
@@ -20,7 +20,7 @@ const views = [
     ],
   },
   {
-    title: 'Vista 3: Representante',
+    title: 'Preregistro: Sobre el representante',
     fields: [
       'Nombre del representante',
       'Número de documento',
@@ -31,63 +31,183 @@ const views = [
   },
 ];
 
+const numberFields = [
+  'RUC',
+  'Teléfono',
+  'Número de beneficiarios a cargo',
+  'Número de preregistros',
+  'Número de documento',
+  'Teléfono del representante',
+];
+
 const HorizontalPages = () => {
   const [viewIndex, setViewIndex] = useState(0);
-  const translateX = React.useRef(new Animated.Value(0)).current;
+  const [inputValues, setInputValues] = useState({});
+  const [validationError, setValidationError] = useState(false);
+  const [touchedFields, setTouchedFields] = useState({});
+  const [rucError, setRucError] = useState(false);
+  const [identificationError, setIdentificationError] = useState(false);
+  const scrollX = new Animated.Value(0);
 
-  
+  const handleInputChange = (viewIndex, field, value) => {
+    if (numberFields.includes(field)) {
+      const numericValue = value.replace(/[^0-9]/g, '');
+      
+      if (field === 'RUC') {
+        setRucError(numericValue.length > 0 && numericValue.length !== 13);
+      }
 
-  React.useEffect(() => {
-    Animated.spring(translateX, {
-      toValue: -viewIndex * width,
-      useNativeDriver: true,
-    }).start();
-  }, [viewIndex]);
+      if (field === 'Número de documento') {
+        setIdentificationError(numericValue.length > 0 && numericValue.length !== 10);
+      }
 
-  const renderViews = () => {
-    return (
-      <Animated.View style={[styles.viewContainer, { transform: [{ translateX }] }]}>
-        {views.map((view, index) => (
-          <View key={index} style={styles.page}>
-            <Text style={styles.header}>{view.title}</Text>
-            {view.fields.map((placeholder, idx) => (
-              <TextInput key={idx} style={styles.input} placeholder={placeholder} />
-            ))}
-            <Button
-              title={index === views.length - 1 ? 'Finalizar y enviar' : 'Siguiente'}
-              onPress={() => {
-                if (index < views.length - 1) setViewIndex(index + 1);
-                else alert('Formulario enviado');
-              }}
-            />
-            {index > 0 && <Button title="Atrás" onPress={() => setViewIndex(index - 1)} />}
-          </View>
-        ))}
-      </Animated.View>
-    );
+      setInputValues((prev) => ({
+        ...prev,
+        [viewIndex]: {
+          ...prev[viewIndex],
+          [field]: numericValue,
+        },
+      }));
+    } else {
+      setInputValues((prev) => ({
+        ...prev,
+        [viewIndex]: {
+          ...prev[viewIndex],
+          [field]: value,
+        },
+      }));
+    }
   };
 
-  const renderIndicators = () => {
+  const validateFields = (fields, viewIndex) => {
+    const currentValues = inputValues[viewIndex] || {};
+    return fields.every((field) => currentValues[field] && currentValues[field].trim() !== '');
+  };
+
+  const validateAllPrevious = (currentIndex) => {
+    for (let i = 0; i <= currentIndex; i++) {
+      const isValid = validateFields(views[i].fields, i);
+      if (!isValid) return false;
+    }
+    return true;
+  };
+
+  const handleNext = (index, fields) => {
+    const isValid = validateAllPrevious(index);
+
+    if (isValid && !rucError && !identificationError) {
+      setValidationError(false);
+      if (index < views.length - 1) {
+        setViewIndex(index + 1);
+        flatListRef.scrollToIndex({ index: index + 1 });
+      } else {
+        alert('Formulario enviado');
+      }
+    } else {
+      setValidationError(true);
+      setTouchedFields((prev) => ({
+        ...prev,
+        [index]: fields,
+      }));
+    }
+  };
+
+  const renderFields = ({ item, index: fieldIndex, parentIndex }) => {
+    const touched = touchedFields[parentIndex] || [];
+
     return (
-      <View style={styles.indicatorContainer}>
-        {views.map((_, index) => (
-          <Animated.View
-            key={index}
-            style={[
-              styles.indicator,
-              { opacity: index === viewIndex ? 1 : 0.3 },
-              { transform: [{ scale: index === viewIndex ? 1.2 : 1 }] }, // Aumentar tamaño del indicador activo
-            ]}
-          />
-        ))}
+      <View key={fieldIndex}>
+        <TextInput
+          style={[
+            styles.input,
+            validationError && touched.includes(item) && !inputValues[parentIndex]?.[item]?.trim() && styles.inputError,
+          ]}
+          placeholder={item}
+          value={inputValues[parentIndex]?.[item] || ''}
+          onChangeText={(text) => handleInputChange(parentIndex, item, text)}
+          keyboardType={numberFields.includes(item) ? 'numeric' : 'default'}
+        />
+        {item === 'RUC' && rucError && (
+          <Text style={styles.errorText}>RUC no válida</Text>
+        )}
+        {item === 'Número de documento' && identificationError && (
+          <Text style={styles.errorText}>Identificación no válida</Text>
+        )}
       </View>
     );
   };
 
+  const renderViews = ({ item, index }) => (
+    <View style={styles.page}>
+      <Text style={styles.header}>{item.title}</Text>
+      <FlatList
+        data={item.fields}
+        keyExtractor={(field) => field}
+        renderItem={({ item, index: fieldIndex }) => renderFields({ item, index: fieldIndex, parentIndex: index })}
+      />
+      {validationError && (
+        <Text style={styles.errorText}>Por favor, complete todos los campos antes de continuar.</Text>
+      )}
+      <Button
+        title={index === views.length - 1 ? 'Finalizar y enviar' : 'Siguiente'}
+        onPress={() => handleNext(index, item.fields)}
+      />
+      {index > 0 && (
+        <Button
+          title="Atrás"
+          onPress={() => {
+            setValidationError(false);
+            setViewIndex(index - 1);
+            flatListRef.scrollToIndex({ index: index - 1 });
+          }}
+        />
+      )}
+    </View>
+  );
+
+  let flatListRef;
+
   return (
     <View style={styles.appContainer}>
-      {renderViews()}
-      {renderIndicators()}
+      <FlatList
+        ref={(ref) => (flatListRef = ref)}
+        data={views}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        renderItem={renderViews}
+        keyExtractor={(_, index) => index.toString()}
+        style={styles.viewContainer}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          { useNativeDriver: false }
+        )}
+        onMomentumScrollEnd={(event) => {
+          const index = Math.round(event.nativeEvent.contentOffset.x / width);
+          setViewIndex(index);
+        }}
+        scrollEnabled={validateAllPrevious(viewIndex)}
+      />
+      <View style={styles.indicatorContainer}>
+        {views.map((_, index) => {
+          const inputRange = [(index - 1) * width, index * width, (index + 1) * width];
+          const scale = scrollX.interpolate({
+            inputRange,
+            outputRange: [1, 1.2, 1],
+            extrapolate: 'clamp',
+          });
+
+          return (
+            <Animated.View
+              key={index}
+              style={[
+                styles.indicator,
+                { opacity: index === viewIndex ? 1 : 0.3, transform: [{ scale }] },
+              ]}
+            />
+          );
+        })}
+      </View>
     </View>
   );
 };
@@ -96,12 +216,9 @@ const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
     backgroundColor: '#E8F5E9',
-    overflow: 'hidden',
   },
   viewContainer: {
-    flexDirection: 'row',
-    width: width * views.length,
-    flex: 1,
+    flexGrow: 0,
   },
   page: {
     width,
@@ -120,10 +237,18 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#BDBDBD',
-    marginBottom: 15,
+    marginBottom: 5,
     padding: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
+  },
+  inputError: {
+    borderColor: 'red',
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginVertical: 5,
   },
   indicatorContainer: {
     flexDirection: 'row',
@@ -139,4 +264,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HorizontalPages; 
+export default HorizontalPages;
