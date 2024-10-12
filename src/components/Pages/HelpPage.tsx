@@ -87,8 +87,8 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer, icon: Icon }) => {
     </View>
   );
 };
-const FAQScreen = () => {
-  const faqs = [
+const HelpPageScreen = () => {
+  const Questions = [
     {
       question: '¿Cómo donar?',
       answer: 'En Donaciones presionas el botón donar 🥫, y luego te saldrán categorías, seleccionas lo que vas a donar 🌽 y luego aumentas en el carrito 🛻!!.',
@@ -113,7 +113,7 @@ const FAQScreen = () => {
 
   return (
     <View style={styles.container}>
-      {faqs.map((faq, index) => (
+      {Questions.map((faq, index) => (
         <FAQItem key={index} question={faq.question} answer={faq.answer} icon={faq.icon} />
       ))}
       <WhatsAppButton phoneNumber="+593960447685" />
@@ -166,4 +166,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FAQScreen;
+export default HelpPageScreen;
