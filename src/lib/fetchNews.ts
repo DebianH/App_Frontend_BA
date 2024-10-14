@@ -12,16 +12,22 @@ export async function getArticles() {
 
     type Article = {
         title: string;
-        content: string;
+        content: string | null;  
+        description: string;
         urlToImage: string;
+        url: string;  
     };
 
     return News.articles.map((item: Article) => {
-        const { title, content, urlToImage } = item;
+        const { title, content, description, urlToImage, url } = item;  
+
+        const fullContent = content || description || 'Contenido no disponible';
+
         return {
             title,
-            content,
+            content: fullContent,
             image: urlToImage,
+            articleUrl: url,  
         };
     });
 }
