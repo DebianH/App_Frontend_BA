@@ -1,6 +1,6 @@
 // rutasDeScreens.tsx
-import React from 'react';
-import { View, Image, Animated, Dimensions, SafeAreaView, Text } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { View, Image, Animated, Dimensions, SafeAreaView, Text, Pressable } from 'react-native';
 import HomeScreenPage from '../Pages/HomeScreenPage';
 import DonationScreenPage from '../Pages/DonationScreenPage';
 import ChartScreenPage from '../Pages/ChartUserScreenPage';
@@ -20,6 +20,8 @@ import PartnersPage from '../Pages/PartnersPage';
 import ProductItem from '../organism/ProductItem';
 import QrGeneratePage from '../Pages/QrGeneratePage';
 import ReceiveProductsPage from '../Pages/ReceiveProductsPage';
+import BottomSheetModalMap from '../organism/BottomSheetMap';
+import MapView, { Marker } from 'react-native-maps';
 
 export type RootStackParamList = {
   HomeStack: undefined;
@@ -77,6 +79,20 @@ function ProfileScreen() {
 }
 
 function DrawerGroup() {
+  const [origin, setOrigin] = useState<any>({
+    latitude: -0.271049,
+    longitude: -78.527303,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
+  const [destination, setDestination] = useState<any>({
+    latitude: -0.267844,
+    longitude: - 78.537671,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
+
+  const refBSheetMap = useRef();
   return (
     <Drawer.Navigator
       initialRouteName={'Routes'}
@@ -143,13 +159,54 @@ function DrawerGroup() {
           ),
           headerTitleAlign: 'center',
           headerRight: () => (
-            <Icon
-              name='trail-sign-outline'
-              // name='cart-outline'
-              size={28}
-              color='black'
-              style={{ marginRight: 10 }}
-            />
+            <>
+              <Pressable onPress={() => refBSheetMap.current.open()}>
+                <Icon
+                  name='trail-sign-outline'
+                  // name='cart-outline'
+                  size={28}
+                  color='black'
+                  style={{ marginRight: 10 }}
+                />
+              </Pressable>
+              <BottomSheetModalMap bottonSheRef={refBSheetMap} >
+                <View style={{ flexDirection: 'column', gap: 10, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ fontSize: 20, color: '#303030' }}>Retirar donación</Text>
+                  <MapView
+                    style={{ width: '100%', height: 400 }}
+                    initialRegion={origin}
+                  >
+                    <Marker
+                      coordinate={origin}
+                      title="Origen"
+                    />
+                    <Marker
+                      coordinate={destination}
+                      title="Destino"
+                    />
+                  </MapView>
+                  <View style={{ flexDirection: 'row', gap: 25, justifyContent: 'center', alignItems: 'center', marginTop: 30 }}>
+                    <Pressable style={{ flexDirection: "row", borderColor: '#b2e38d', borderWidth: 1, paddingHorizontal: 25, paddingVertical: 10, borderRadius: 20, gap: 10, justifyContent: 'center', alignItems: 'center' }}>
+                      <Icon
+                        name='exit-outline'
+                        size={18}
+                        color='#c0c0c0'
+                      />
+                      <Text style={{ fontSize: 18, color: '#c0c0c0' }}>Cerrar</Text>
+                    </Pressable>
+                    <Pressable style={{ flexDirection: "row", backgroundColor: '#6dcc25', paddingHorizontal: 25, paddingVertical: 10, borderRadius: 20, gap: 10, justifyContent: 'center', alignItems: 'center' }}>
+                      <Icon
+                        name='notifications-outline'
+                        size={28}
+                        color='#fff'
+                      />
+                      <Text style={{ fontSize: 18, color: '#fff' }}>Notificar</Text>
+                    </Pressable>
+                  </View>
+                </View>
+              </BottomSheetModalMap>
+
+            </>
           ),
         }} />
 
