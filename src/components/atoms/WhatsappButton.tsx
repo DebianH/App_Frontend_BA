@@ -1,53 +1,54 @@
 import React from 'react';
-import { TouchableOpacity, Image, Text, StyleSheet, Linking } from 'react-native';
+import { Pressable, Text, StyleSheet, Linking, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface WhatsAppButtonProps {
-  phoneNumber: string;
+    phoneNumber: string;
 }
 
 const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ phoneNumber }) => {
-  const openWhatsApp = () => {
-    const url = `whatsapp://send?phone=${phoneNumber}`;
-    
-    Linking.canOpenURL(url)
-      .then((supported) => {
-        if (!supported) {
-          alert('WhatsApp no está instalado en este dispositivo');
-        } else {
-          return Linking.openURL(url);
-        }
-      })
-      .catch((err) => console.error('Error al abrir WhatsApp', err));
-  };
+    const openWhatsApp = () => {
+        const url = `whatsapp://send?phone=${phoneNumber}`;
 
-  return (
-    <TouchableOpacity style={styles.button} onPress={openWhatsApp}>
-      <Image source={require('../../assets/WhatsappIcon.png')} style={styles.icon} />
-      <Text style={styles.buttonText}>Contactar por WhatsApp</Text>
-    </TouchableOpacity>
-  );
+        Linking.canOpenURL(url)
+            .then((supported) => {
+                if (!supported) {
+                    alert('WhatsApp no está instalado en este dispositivo');
+                } else {
+                    return Linking.openURL(url);
+                }
+            })
+            .catch((err) => console.error('Error al abrir WhatsApp', err));
+    };
+
+    return (
+        <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Pressable style={styles.button} onPress={openWhatsApp}>
+                <Icon name="chatbubble-ellipses-outline" size={20} color="#fff" />
+                <Text style={styles.buttonText}>Contactar</Text>
+            </Pressable>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#0a7d64',
-    padding: 15,
-    borderRadius: 30,
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  icon: {
-    width: 24,
-    height: 24,
-    marginRight: 10, // Espacio entre ícono y texto
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
+    button: {
+        position: 'absolute',
+        bottom: 80,
+        width: '50%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#0a7d64',
+        padding: 15,
+        borderRadius: 30,
+        justifyContent: 'center',
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginLeft: 10,
+    },
 });
 
 export default WhatsAppButton;

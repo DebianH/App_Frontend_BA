@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, FlatList, Text, Image, TouchableOpacity, Modal } from 'react-native';
 import { getArticles } from '../../lib/fetchNews';
-import NewsDetail from '../Pages/NewsDetailPage'; 
-import { Article } from '../../components/atoms/ArticlesInterface'; 
+import NewsDetail from '../Pages/NewsDetailPage';
+// import { Article } from '../../components/atoms/ArticlesInterface';
+
+export type Article = {
+  title: string;
+  content: string;
+  image: string;
+  articleUrl: string;
+};
 
 const NewsScreen = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -46,7 +53,7 @@ const NewsScreen = () => {
       {/* Modal para mostrar el detalle de la noticia */}
       <Modal
         visible={modalVisible}
-        animationType="slide" // Puedes cambiar esto a "fade" si lo prefieres
+        animationType="fade" // Puedes cambiar esto a "fade" si lo prefieres
         transparent={true} // Esto permite que el fondo sea visible
       >
         <View style={styles.modalContainer}>
@@ -69,7 +76,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: '#f8f8f8',
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: '#c0c0c0',
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowRadius: 5,

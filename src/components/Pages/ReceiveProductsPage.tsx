@@ -10,6 +10,12 @@ import {
     Alert,
 } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
+import RBSheet from 'react-native-raw-bottom-sheet';
+
+type BottomSheetModalProps = {
+    bottonSheRef: React.RefObject<any>;
+    children: React.ReactNode;
+};
 
 export default function ReceiveProductsPage() {
     const donationsReceive = [
@@ -74,7 +80,7 @@ export default function ReceiveProductsPage() {
             <View style={styles.card}>
                 <View style={{ flexDirection: 'column', gap: 10, justifyContent: 'center', alignItems: 'flex-start' }}>
                     <View style={{ flexDirection: 'row', gap: 10, }}>
-                        <Icon name="fast-food-outline" size={20} color="green" />
+                        <Icon name="bag-handle" size={20} color="green" />
                         <Text style={{ fontSize: 16, color: '#4a4a4a' }}>{donation.products[0].nameProduct}</Text>
                         <Text style={{ fontSize: 16, color: '#4a4a4a', fontWeight: "bold" }}>kg:{donation.qty}</Text>
                     </View>
@@ -101,7 +107,7 @@ export default function ReceiveProductsPage() {
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'column', gap: 20, flex: 1 }}>
             <Text style={{ fontSize: 22, fontWeight: "bold", marginTop: 15, textAlign: "center" }}>
-                Aceptar Productos
+                Donaciones
             </Text>
             <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'center', alignItems: 'center', }}>
                 <Icon name="checkmark-circle-outline" size={15} color="green" />
@@ -115,6 +121,7 @@ export default function ReceiveProductsPage() {
                     contentContainerStyle={styles.list}
                 />
             </View>
+
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -125,9 +132,9 @@ export default function ReceiveProductsPage() {
                 }}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 5, borderColor: '#6dcc25', borderWidth: 1, paddingHorizontal: 40, paddingVertical: 10, borderRadius: 15 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 5, borderColor: '#6dcc25', borderWidth: 1, paddingHorizontal: 30, paddingVertical: 10, borderRadius: 15 }}>
                             <Icon name="gift-outline" size={20} color="#010101" />
-                            <Text style={styles.modalText}>Detalles donados</Text>
+                            <Text style={styles.modalText}>Descripción productos</Text>
                         </View>
                         <View>
                             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 5, alignContent: 'center', marginBottom: 20 }}>
