@@ -1,69 +1,59 @@
-import React from "react";
-import {
-    View,
-    Image,
-    StyleSheet,
-    Text,
-    Pressable,
-    Linking,
-    Alert,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useCameraPermissions, CameraView, CameraType } from "expo-camera";
-export default function QrScreenPage() {
-    const [permisos, setPermisos] = useCameraPermissions();
-    const [isVisible, setIsVisible] = React.useState(false);
-    const [scanning, setScanning] = React.useState(false);
-    // setPermisos();
+import React, { useState } from 'react';
+import { View, Text, Pressable, Linking, Alert, StyleSheet } from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 
-    const isValidUrl = (url: any) => {
-        const regex = /^(ftp|http|https):\/\/[^ "]+$/;
-        return regex.test(url);
+interface QRData {
+    name: string;
+    id: string;
+}
+
+export default function QrGeneratePage() {
+    const [qrVisible, setQRVisible] = useState<boolean>(false);
+
+    const qrData: QRData = {
+        name: 'David',
+        id: '123',
+    };
+    const openQr = () => {
+        setQRVisible(true);
     };
 
-    const openScanner = () => {
-        setIsVisible(true);
-    };
-
-    const handleBarCodeScanned = ({ data: data }: any) => {
-        if (!isValidUrl(data)) {
-            Alert.alert("Error", "Código QR no contiene una URL válida");
-        }
-        Linking.openURL(data);
-    };
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'column', gap: 20 }}>
             <Text style={{ fontSize: 24, fontWeight: "semibold", marginVertical: 10, textAlign: "center" }}>
-                Escanear QR
+                Generar QR
             </Text>
             <View style={styles.square}>
-                {isVisible &&
-                    <CameraView
-                        style={StyleSheet.absoluteFill}
-                        facing="back"
-                        onBarcodeScanned={handleBarCodeScanned}
+                {qrVisible && (
+                    <QRCode
+                        value={JSON.stringify(qrData)}
+                        size={230}
+                        logoMargin={2}
+                        color="#5e9e1c"
                     />
-                }
+                )}
             </View>
             <View style={styles.buttonContainer}>
-                <Pressable style={styles.buttonLeft} onPress={() => setIsVisible(false)}>
+                <Pressable style={styles.buttonLeft} onPress={() => setQRVisible(false)}>
                     <Text style={styles.buttonText}>Cancelar</Text>
                 </Pressable>
-                <Pressable style={styles.buttonRight} onPress={openScanner}>
-                    <Text style={styles.buttonText}>Leer QR</Text>
+                <Pressable style={styles.buttonRight} onPress={openQr}>
+                    <Text style={styles.buttonText}>Generar QR</Text>
                 </Pressable>
             </View>
         </View>
     );
 }
-
 const styles = StyleSheet.create({
+
     square: {
-        width: 280,
-        height: 280,
-        borderRadius: 10,
+        width: 250,
+        height: 250,
+        borderRadius: 5,
         borderWidth: 1,
         borderColor: '#000',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     buttonContainer: {
         marginTop: 30,
@@ -75,7 +65,7 @@ const styles = StyleSheet.create({
     },
     buttonLeft: {
         position: 'absolute',
-        left: 30,
+        left: 20,
         backgroundColor: '#d3e6d1',
         paddingVertical: 15,
         paddingHorizontal: 30,
@@ -86,7 +76,7 @@ const styles = StyleSheet.create({
     },
     buttonRight: {
         position: 'absolute',
-        right: 30,
+        right: 20,
         backgroundColor: '#77c528',
         paddingVertical: 15,
         paddingHorizontal: 30,

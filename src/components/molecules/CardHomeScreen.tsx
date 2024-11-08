@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, ImageSourcePropType, TouchableOpacity, Image } from 'react-native';
-import Icon from '../atoms/iconHomeScreen';
+import { View, StyleSheet, Text, ImageSourcePropType, TouchableOpacity, Image, Pressable } from 'react-native';
 
 interface CardProps {
   iconSource: ImageSourcePropType;
@@ -12,10 +11,10 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ iconSource, title, width = 160, height = 200, onPress }) => {
   return (
-    <TouchableOpacity style={[styles.card, { width, height }]} onPress={onPress}>
+    <Pressable style={[styles.card, { width, height }]} onPress={onPress}>
       <Text style={styles.title}>{title}</Text>
       <Image source={iconSource} />
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -39,8 +38,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: '#000',
-    marginBottom: 20,
+    marginBottom: 10,
     textAlign: "center"
+  },
+  image: {
+    width: '100%',
+    height: '70%',
+    resizeMode: 'contain',
   },
 });
 

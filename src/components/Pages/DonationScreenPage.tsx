@@ -1,47 +1,51 @@
-import React from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
-import Card from "../molecules/CardHomeScreen";
-import { SafeAreaView } from "react-native-safe-area-context";
-import DonationScreenCards from "../organism/DonationCardsScreen";
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, FlatList, Text, Image, useWindowDimensions } from 'react-native';
+import { getCategories } from '../../lib/fetchProducts';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { CategoryItem } from '../molecules/CategoryItem';
 
-const DonationScreenPage: React.FC = () => {
+type Category = {
+  id: number,
+  name: string,
+  image: string,
+  creationAt: string,
+  updatedAt: string,
+};
+
+export default function DonationScreenPage() {
+  const insets = useSafeAreaInsets();
+
+  const [categories, setCategories] = useState<Category[]>([]);
+  useEffect(() => {
+    getCategories().then((categories) => {
+      setCategories(categories);
+    })
+  }, []);
+
   return (
-    <View style={styles.SafeAreaView}>
-      <View style={styles.container}>
-        <DonationScreenCards />
-      </View>
+    <View style={styles.container}>
+      <FlatList
+        data={categories}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <CategoryItem category={item} />}
+        numColumns={2}
+        columnWrapperStyle={styles.row} // alinear columnas
+        key={(categories.length > 0) ? 'fixed-columns' : 'dynamic-columns'}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  SafeAreaView: {
-    flex: 1,
-  },
-  subtitle: {
-    fontSize: 24,
-    color: "#000000",
-    textAlign: "left",
-    marginHorizontal: 20,
-    marginVertical: 30,
-    fontWeight: "bold",
-  },
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
   },
-  scrollViewContent: {
-    flexGrow: 1,
-  },
-  mainSection: {
-    transform: [{ translateY: -10 }],
-  },
-  cardsContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    padding: 10,
+  //importante
+  row: {
+    flex: 1,
+    justifyContent: 'space-around',
+    paddingTop: 10,
   },
 });
 
-export default DonationScreenPage;

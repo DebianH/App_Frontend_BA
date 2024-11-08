@@ -1,5 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Image, ImageSourcePropType } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  ImageSourcePropType,
+  Dimensions,
+} from "react-native";
 import Button from "../atoms/buttonHomeScreen"; // Asegúrate de que el nombre y la ruta sean correctos
 
 interface CardWithButtonProps {
@@ -7,6 +13,8 @@ interface CardWithButtonProps {
   buttonTitle: string;
   onButtonPress: () => void;
 }
+const imageWidth = Dimensions.get("window").width * 0.9;
+const imageHeight = (imageWidth / 3) * 2.5;
 
 const CardWithButton: React.FC<CardWithButtonProps> = ({
   iconSource,
@@ -42,8 +50,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 10,
-    width: 350,
-    height: 300,
+    width: imageWidth,
+    height: imageHeight,
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden", // Asegura que el contenido no sobresalga del borde redondeado
@@ -51,14 +59,21 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: "100%",
     height: "100%",
-    borderRadius: 10, // Asegura que la imagen se ajuste al borde redondeado
+    borderRadius: 10,
     overflow: "hidden",
+    gap: 10,
+    paddingHorizontal: 10,
+    // transform: [
+    //   { translateX: imageWidth * index },
+    // ]
   },
   image: {
     width: "100%",
     height: "100%",
     resizeMode: "cover",
     opacity: 0.7,
+
+    // position: 'absolute',
   },
   overlay: {
     position: "absolute",
