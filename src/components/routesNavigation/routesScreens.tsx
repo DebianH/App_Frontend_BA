@@ -36,6 +36,8 @@ import QrGeneratePage from "../Pages/QrGeneratePage";
 import ReceiveProductsPage from "../Pages/ReceiveProductsPage";
 import BottomSheetModalMap from "../organism/BottomSheetMap";
 import MapView, { Marker } from "react-native-maps";
+import Detalles from "../Pages/Detalles";
+import Pagar from "../Pages/Pagar";
 
 export type RootStackParamList = {
   HomeStack: undefined;
@@ -62,6 +64,16 @@ function BtnPaymenScreen() {
       <BtnPaymenStack.Screen
         name="BtnPaymenPage"
         component={BtnPaymenPage}
+        options={{ headerShown: false }}
+      />
+      <BtnPaymenStack.Screen
+        name="Detalles"
+        component={Detalles}
+        options={{ headerShown: false }}
+      />
+      <BtnPaymenStack.Screen
+        name="Pagar"
+        component={Pagar}
         options={{ headerShown: false }}
       />
     </BtnPaymenStack.Navigator>
