@@ -16,6 +16,7 @@ const Detalles = () => {
   //   useEffect(() => {
   //     getLocations().then((pais) => setPais(pais));
   //   }, []);
+  
   const [text, setText] = React.useState("");
   const [value, setValue] = useState(null);
   const [pais, setPais] = useState<Location[]>();
@@ -191,10 +192,10 @@ const styles = StyleSheet.create({
       width: 0,
       height: 1,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    shadowOpacity: 0,
+    shadowRadius: 0,
 
-    elevation: 2,
+    elevation: 0,
   },
   icon: {
     marginRight: 5,
