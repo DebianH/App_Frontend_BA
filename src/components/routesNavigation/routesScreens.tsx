@@ -38,6 +38,7 @@ import BottomSheetModalMap from "../organism/BottomSheetMap";
 import MapView, { Marker } from "react-native-maps";
 import Detalles from "../Pages/Detalles";
 import Pagar from "../Pages/Pagar";
+import Cantidad from "../Pages/Cantidad";
 
 export type RootStackParamList = {
   HomeStack: undefined;
@@ -64,6 +65,11 @@ function BtnPaymenScreen() {
       <BtnPaymenStack.Screen
         name="BtnPaymenPage"
         component={BtnPaymenPage}
+        options={{ headerShown: false }}
+      />
+      <BtnPaymenStack.Screen
+        name="Cantidad"
+        component={Cantidad}
         options={{ headerShown: false }}
       />
       <BtnPaymenStack.Screen

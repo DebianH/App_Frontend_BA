@@ -23,6 +23,9 @@ const Detalles = () => {
   const handlePagar = () => {
     navigate("Pagar");
   };
+  const handleCantidad = () => {
+    navigate("Cantidad");
+  };
   return (
     <SafeAreaProvider style={styles.container}>
       <ScrollView>
@@ -110,7 +113,29 @@ TODO: dynamic dropdown selection list
             }}
             textAlignVertical="top"
           />
-          <View>
+          <View
+            style={{
+              flexDirection: "row",
+              backgroundColor: "#fff",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Pressable
+              style={[
+                styles.button,
+                {
+                  width: 100,
+                  padding: 2,
+                  marginTop: 50,
+                  marginLeft: 300,
+                  borderRadius: 10,
+                },
+              ]}
+              onPress={handleCantidad}
+            >
+              <Text style={{ textAlign: "center", marginTop: 5 }}>Atras</Text>
+            </Pressable>
             <Pressable
               style={[
                 styles.button,
@@ -119,8 +144,9 @@ TODO: dynamic dropdown selection list
                   padding: 2,
                   marginTop: 50,
                   marginLeft: 200,
-                  borderRadius: 20,
-                  borderColor: "#722f37",
+                  borderRadius: 10,
+                  marginRight: 100,
+                  borderColor: "##ff7514",
                 },
               ]}
               onPress={handlePagar}

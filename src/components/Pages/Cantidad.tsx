@@ -17,17 +17,31 @@ const Cantidad = () => {
   const handleDetalles = () => {
     navigate("Detalles");
   };
-
+  const ItemSeparator = () => <View style={styles.separator} />;
   return (
     <SafeAreaProvider style={styles.vista}>
-      <Text
-        style={[
-          styles.text,
-          { fontSize: 40, color: "orange", fontWeight: "bold" },
-        ]}
-      >
-        Donar
-      </Text>
+      <View>
+        <Text
+          style={[
+            styles.text,
+            { fontSize: 40, color: "orange", fontWeight: "bold" },
+          ]}
+        >
+          Donar
+        </Text>
+        <Text
+          style={{
+            fontSize: 15,
+            color: "black",
+            fontWeight: "regular",
+            textAlign: "left",
+            marginLeft: 5,
+            marginTop: 90,
+          }}
+        >
+          Escoge el monto de tu donación
+        </Text>
+      </View>
       <View style={styles.monto}>
         <FlatList
           data={DATA}
@@ -38,6 +52,7 @@ const Cantidad = () => {
                   {
                     backgroundColor:
                       selectedAmount === item.dinero ? "#FFA500" : "#E0E0E0",
+                    gap: 10,
                   },
                   styles.button,
                 ]}
@@ -48,33 +63,43 @@ const Cantidad = () => {
               </Pressable>
             );
           }}
+          ItemSeparatorComponent={ItemSeparator}
           ListFooterComponent={
-            <Pressable
-              style={[
-                styles.button,
-                {
-                  backgroundColor:
-                    selectedAmount === "Otros" ? "#FFA500" : "#E0E0E0",
-                },
-              ]}
-              onPress={() => setSelectedAmount("Otros")}
-            >
-              <Text style={styles.text}>Otros</Text>
-            </Pressable>
+            <View style={styles.footer}>
+              <Pressable
+                style={[
+                  styles.button,
+                  {
+                    backgroundColor:
+                      selectedAmount === "Otros" ? "#FFA500" : "#E0E0E0",
+                  },
+                ]}
+                onPress={() => setSelectedAmount("Otros")}
+              >
+                <Text style={styles.text}>Otros</Text>
+              </Pressable>
+            </View>
           }
         />
 
         {/* TODO El teclado debe ser solo numerico y tiene que tener opciones*/}
       </View>
-      <View>
+      <View style={{ marginTop: 30 }}>
         <Pressable
           style={[
             styles.button,
-            { width: 100, padding: 2, marginTop: 50, marginLeft: 200 },
+            {
+              width: 100,
+              padding: 2,
+              marginLeft: 230,
+              borderRadius: 10,
+            },
           ]}
           onPress={handleDetalles}
         >
-          <Text>Siguiente {">>"}</Text>
+          <Text style={{ textAlign: "center", marginTop: 5 }}>
+            Siguiente {">>"}
+          </Text>
         </Pressable>
       </View>
     </SafeAreaProvider>
@@ -86,16 +111,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   monto: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 200,
-    marginTop: 100,
+    flexDirection: "column",
+    marginTop: 20,
     marginLeft: 30,
     justifyContent: "center",
     alignContent: "center",
   },
   text: {
-    fontSize: 14,
     color: "#000",
     textAlign: "center",
     marginVertical: 10,
@@ -103,8 +125,15 @@ const styles = StyleSheet.create({
   button: {
     borderColor: "black",
     borderWidth: 1,
-    borderRadius: 0,
+    borderRadius: 15,
     width: 300,
     height: 50,
+  },
+
+  separator: {
+    height: 10,
+  },
+  footer: {
+    marginTop: 20,
   },
 });
