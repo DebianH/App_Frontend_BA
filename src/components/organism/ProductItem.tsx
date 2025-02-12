@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { Pressable, View, StyleSheet, Text, Image, FlatList, TextInput } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import BtnSheModal from './BottomSheet';
@@ -21,6 +21,13 @@ export default function ProductItem() {
     const route: any = useRoute();
     const { products } = route.params;
     const refBSheet = useRef();
+    const [cantProduct, setcantProduct] = useState(0);
+    const handleNumberChange = (text: string) => {
+        const numericValue = parseFloat(text);
+        if (numericValue > 0) {
+            setcantProduct(numericValue);
+        }
+    };
 
     const renderItem = ({ item }: { item: Product }) => (
 
@@ -54,8 +61,9 @@ export default function ProductItem() {
                     <Text>Ingrese la cantidad a donar</Text>
                     <TextInput
                         // style={styles.input}
-                        // onChangeText={onChangeNumber}
-                        value="5"
+                        onChangeText={handleNumberChange}
+
+                        value={cantProduct?.toString() || ''}
                         placeholder="useless placeholder"
                         keyboardType="numeric"
                     />
