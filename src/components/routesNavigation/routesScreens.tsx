@@ -15,6 +15,9 @@ import ProfileHomeScreenPage from '../Pages/ProfileHomeScreenPage';
 import ProfileEditPage from '../Pages/ProfileEditPage';
 import ProfileAccountPage from '../Pages/ProfileAccountPage';
 import BtnPaymenPage from '../Pages/BtnPaymenPage';
+import BtnPaymenDetails from '../Pages/BtnPaymenDetails';
+import BtnPaymenPay from '../Pages/BtnPaymenPay';
+import BtnPaymenQty from '../Pages/BtnPaymenQty';
 import HelpPage from '../Pages/HelpPage';
 import PartnersPage from '../Pages/PartnersPage';
 import ProductItem from '../organism/ProductItem';
@@ -42,17 +45,7 @@ const DonationStack = createNativeStackNavigator();
 const EditProfileStack = createNativeStackNavigator();
 const BtnPaymenStack = createNativeStackNavigator();
 
-function BtnPaymenScreen() {
-  return (
-    <BtnPaymenStack.Navigator>
-      <BtnPaymenStack.Screen
-        name="BtnPaymenPage"
-        component={BtnPaymenPage}
-        options={{ headerShown: false, }}
-      />
-    </BtnPaymenStack.Navigator>
-  );
-}
+
 
 function ProfileScreen() {
   return (
@@ -439,7 +432,32 @@ function BtnPaymenNavigation() {
     </Tab.Navigator>
   );
 }
-
+function BtnPaymenScreen() {
+  return (
+    <BtnPaymenStack.Navigator initialRouteName='BtnPaymenQty'>
+      <BtnPaymenStack.Screen
+        name="BtnPaymenPage"
+        component={BtnPaymenPage}
+        options={{ headerShown: false, }}
+      />
+      <BtnPaymenStack.Screen
+        name="BtnPaymenDetails"
+        component={BtnPaymenDetails}
+        options={{ headerShown: false, }}
+      />
+      <BtnPaymenStack.Screen
+        name="BtnPaymenPay"
+        component={BtnPaymenPay}
+        options={{ headerShown: false, }}
+      />
+      <BtnPaymenStack.Screen
+        name="BtnPaymenQty"
+        component={BtnPaymenQty}
+        options={{ headerShown: false, }}
+      />
+    </BtnPaymenStack.Navigator>
+  );
+}
 export default DrawerGroup;
 
 

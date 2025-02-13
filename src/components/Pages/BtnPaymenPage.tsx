@@ -1,14 +1,19 @@
 
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
-
+import React, { useState } from "react";
+import {
+    View,
+    SafeAreaView,
+} from "react-native";
+import BtnPaymentQty from "./BtnPaymenQty";
+// import Pagar from "../Pages/Pagar";
+// import Cantidad from "../Pages/Cantidad";
 export default function BtnPaymenPage() {
     return (
-        <SafeAreaView >
+        <SafeAreaView>
             <View>
-                <Text style={{ fontSize: 14, color: '#000', textAlign: 'center', marginVertical: 100 }}> Botón de pago</Text>
+                <BtnPaymentQty />
+                {/* <Text>Pagar</Text> */}
             </View>
         </SafeAreaView>
-    )
-
+    );
 }
